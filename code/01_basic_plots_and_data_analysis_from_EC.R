@@ -13,9 +13,11 @@ library(extrafont)
 # bring in curated data
 trialdat <- read.csv("field_trial_data.csv")
 
+# setting the order of x-axis
 datorder <- c("STD High",	"STD Low",	"S1 (Lab)",	"S1 (Field)",	"S2 (Lab)",	"S2 (Field)",	"S3 (Lab)",	"S3 (Field)",	"Field Neg (Lab)",	"Field Neg (Field)",	"Extr. Neg (Lab)",	"Extr. Neg (Field)",	"NTC")
 trialdat$sample <- factor(trialdat$sample, levels = datorder)
 
+# plotting Ct values and DNA concentration simultaneously to see what this looks like...
 ggplot(trialdat, aes(x = sample)) +
   geom_point(aes(y = ct_value, fill = assay_site), shape = 21, size = 3.5, position = position_dodge(0.5)) +
   geom_point(aes(y = dna_conc/2), shape = 8, size = 2) +
@@ -24,7 +26,7 @@ ggplot(trialdat, aes(x = sample)) +
   scale_y_continuous(sec.axis = sec_axis(~ . * 2, name = expression(paste("DNA Concentration (ng/",  mu, "L)"))  # Label and transformation for secondary y-axis
   )) +
   labs(x = NULL, y = "Ct value", fill = "Assay Site")
-
+# maybe this is a useful way to represent data... maybe not!
 
 #######################################
 ## implementation data visualization ##
