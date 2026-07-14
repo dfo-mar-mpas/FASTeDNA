@@ -13,36 +13,10 @@ library(extrafont)
 # bring in curated data
 trialdat <- read.csv("field_trial_data.csv")
 
-# plotting with just Ct data
-ggplot(trialdat, aes(x = sample, y = ct_value, color = assay_site)) +
-  geom_point(size = 3, position = position_dodge(0.3)) +
-  theme(axis.text.x = element_text(angle = 45, hjust =1, size = 8),
-        axis.title.y = element_text(margin = margin(r = 10))) +
-  labs(x = "Sample", y = "Ct", color = "assay_site")
-
-
-# trying another plot adding in concentration data to same plot
-# selecting the order of data for plotting
-xorder <- c("Std_8","Std_1","RA_A","RA_B","RB_A","RB_B","RC_A","RC_B","C_A_field_blank","C_B_field_blank","Field_ENEG","Lab_ENEG","Field_NTC", "Lab_NTC")
-trialdat$sample <- factor(trialdat$sample, levels = xorder)
-
-# plotting again with additional dna conc axis added
-ggplot(trialdat, aes(x = sample)) +
-  geom_point(aes(y = ct_value, fill = assay_site), shape = 21, size = 3.5, position = position_dodge(0.3)) +
-  geom_point(aes(y = dna_conc/2), shape = 8, size = 2) +
-  theme(axis.text.x = element_text(angle = 45, hjust =1, size = 8),
-        axis.title.y = element_text(margin = margin(r = 10))) +
-  scale_y_continuous(sec.axis = sec_axis(~ . * 2, name = expression(paste("DNA Concentration (ng/",  mu, "L)"))  # Label and transformation for secondary y-axis
-  )) +
-  labs(x = "Sample", y = "Ct value", fill = "Assay Site")
-
-## trying again with improved sample names
-trialdat2 <- read.csv("field_trial_data.csv")
-
 datorder <- c("STD High",	"STD Low",	"S1 (Lab)",	"S1 (Field)",	"S2 (Lab)",	"S2 (Field)",	"S3 (Lab)",	"S3 (Field)",	"Field Neg (Lab)",	"Field Neg (Field)",	"Extr. Neg (Lab)",	"Extr. Neg (Field)",	"NTC")
-trialdat2$sample <- factor(trialdat2$sample, levels = datorder)
+trialdat$sample <- factor(trialdat$sample, levels = datorder)
 
-ggplot(trialdat2, aes(x = sample)) +
+ggplot(trialdat, aes(x = sample)) +
   geom_point(aes(y = ct_value, fill = assay_site), shape = 21, size = 3.5, position = position_dodge(0.5)) +
   geom_point(aes(y = dna_conc/2), shape = 8, size = 2) +
   theme(axis.text.x = element_text(angle = 45, hjust =1, size = 8),
