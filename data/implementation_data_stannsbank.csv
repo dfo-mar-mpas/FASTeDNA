@@ -1,0 +1,43 @@
+sample,protocol,ct_value
+STD High,Field,21.7
+STD High,Field,21.8
+STD High,Field,NA
+STD High,Lab,20.9
+STD High,Lab,20.9
+STD High,Lab,20.8
+STD Low,Field,35.5
+STD Low,Field,35.1
+STD Low,Field,NA
+STD Low,Lab,34.4
+STD Low,Lab,34.5
+STD Low,Lab,34.5
+eDNA 1,Field,0
+eDNA 1,Field,0
+eDNA 1,Field,0
+eDNA 1,Lab,0
+eDNA 1,Lab,0
+eDNA 1,Lab,0
+eDNA 2,Field,36.9
+eDNA 2,Field,37.7
+eDNA 2,Field,37.6
+eDNA 2,Lab,38.906
+eDNA 2,Lab,37.064
+eDNA 2,Lab,38.642
+Extr. Neg,Field,0
+Extr. Neg,Field,0
+Extr. Neg,Field,NA
+Extr. Neg,Lab,0
+Extr. Neg,Lab,0
+Extr. Neg,Lab,0
+NTC,Field,0
+NTC,Field,NA
+NTC,Field,NA
+NTC,Lab,0
+NTC,Lab,0
+NTC,Lab,0
+Pos. Ctrl,Field,28.8
+Pos. Ctrl,Field,NA
+Pos. Ctrl,Field,NA
+Pos. Ctrl,Lab,27.793
+Pos. Ctrl,Lab,27.654
+Pos. Ctrl,Lab,27.684
