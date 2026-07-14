@@ -11,7 +11,7 @@ library(extrafont)
 #########################
 
 # bring in curated data
-trialdat <- read.csv("R:/Science/CESD/ABL/Project Files/AIS/APC0252 - R&D Field protocol for rapid AIS detection/Manuscript/Data analysis/field_trial_data.csv")
+trialdat <- read.csv("field_trial_data.csv")
 
 # plotting with just Ct data
 ggplot(trialdat, aes(x = sample, y = ct_value, color = assay_site)) +
@@ -36,9 +36,8 @@ ggplot(trialdat, aes(x = sample)) +
   )) +
   labs(x = "Sample", y = "Ct value", fill = "Assay Site")
 
-
 ## trying again with improved sample names
-trialdat2 <- read.csv("R:/Science/CESD/ABL/Project Files/AIS/APC0252 - R&D Field protocol for rapid AIS detection/Manuscript/Data analysis/field_trial_data.csv")
+trialdat2 <- read.csv("field_trial_data.csv")
 
 datorder <- c("STD High",	"STD Low",	"S1 (Lab)",	"S1 (Field)",	"S2 (Lab)",	"S2 (Field)",	"S3 (Lab)",	"S3 (Field)",	"Field Neg (Lab)",	"Field Neg (Field)",	"Extr. Neg (Lab)",	"Extr. Neg (Field)",	"NTC")
 trialdat2$sample <- factor(trialdat2$sample, levels = datorder)
@@ -58,7 +57,7 @@ ggplot(trialdat2, aes(x = sample)) +
 #######################################
 
 # st anns bank (Anarhichas lupus)
-sadat <- read.csv("R:/Science/CESD/ABL/Project Files/AIS/APC0252 - R&D Field protocol for rapid AIS detection/Manuscript/Data analysis/implementation_data_stannsbank.csv") %>% #
+sadat <- read.csv("implementation_data_stannsbank.csv") %>% #
   mutate(sample = fct_relevel(sample, "STD High", "STD Low", "Pos. Ctrl", "eDNA 1", "eDNA 2", "Extr. Neg", "NTC"))  # bringing in the data and setting the order fo x values for plotting
 
 sadatplot <- ggplot(sadat, aes(x = sample, y = ct_value, color = protocol)) +
@@ -71,7 +70,7 @@ sadatplot <- ggplot(sadat, aes(x = sample, y = ct_value, color = protocol)) +
 
 
 # halifax harbour (sargassum muticum)
-hhdat <- read.csv("R:/Science/CESD/ABL/Project Files/AIS/APC0252 - R&D Field protocol for rapid AIS detection/Manuscript/Data analysis/implementation_data_hharbour.csv") %>%
+hhdat <- read.csv("implementation_data_hharbour.csv") %>%
   mutate(sample = fct_relevel(sample, "STD High", "STD Low", "Pos. Ctrl", "eDNA 1", "eDNA 2", "eDNA Neg", "Extr. Neg", "NTC"))
   
 hhdatplot <- ggplot(hhdat, aes(x = sample, y = ct_value, color = protocol)) +
@@ -84,7 +83,7 @@ hhdatplot <- ggplot(hhdat, aes(x = sample, y = ct_value, color = protocol)) +
 
 
 # hmcs william hall (Semibalanus balanoides)
-whdat <- read.csv("R:/Science/CESD/ABL/Project Files/AIS/APC0252 - R&D Field protocol for rapid AIS detection/Manuscript/Data analysis/implementation_data_williamhall.csv") %>%
+whdat <- read.csv("implementation_data_williamhall.csv") %>%
   mutate(sample = fct_relevel(sample, "STD High", "STD Low", "Pos. Ctrl", "eDNA 1", "eDNA 2", "eDNA Neg", "Extr. Neg", "NTC"))
 
 
@@ -98,7 +97,7 @@ whdatplot <- ggplot(whdat, aes(x = sample, y = ct_value, color = protocol)) +
   
 
 # three mile lake  (Procambarus clarkii)
-tmldat <- read.csv("R:/Science/CESD/ABL/Project Files/AIS/APC0252 - R&D Field protocol for rapid AIS detection/Manuscript/Data analysis/implementation_data_threemile.csv") %>%
+tmldat <- read.csv("implementation_data_threemile.csv") %>%
   mutate(sample = fct_relevel(sample, "STD High", "STD Low", "Pos. Ctrl", "eDNA 1", "eDNA 2", "Extr. Neg", "NTC"))
 
 tmldatplot <- ggplot(tmldat, aes(x = sample, y = ct_value, color = protocol)) +
@@ -130,7 +129,7 @@ plot_grid(combplot, legplot, ncol = 2, rel_widths = c(1,0.1))
 ##################################################################
 ## visualizing assay stability test (prepared assays stored at RT)
 # bring in the data for B. schlosseri
-bsstabdat <- read.csv("C:/Users/CRONMILLERE/Downloads/b_schlosseri_assay_stability_data.csv") %>%
+bsstabdat <- read.csv("b_schlosseri_assay_stability_data.csv") %>%
   filter(!is.na(Ct))
 
 #plotting Ct values by time point
@@ -150,12 +149,11 @@ bsstabplot <- ggplot(bsstabdat, aes(x = time, y = Ct, color = sample)) +
         legend.position = "none") +
   scale_y_continuous(limits = c(30, 42), breaks = c(30, 34, 38, 42)) +
   labs(x = NULL, y = "Ct", color = "Sample")
-
 bsstabplot
 
 
 # now for C. intestinalis
-cistabdat <- read.csv("C:/Users/CRONMILLERE/Downloads/c_intestinalis_assay_stability_data.csv") %>%
+cistabdat <- read.csv("c_intestinalis_assay_stability_data.csv") %>%
   filter(!is.na(Ct))
 
 #plotting Ct values by time point
@@ -166,7 +164,6 @@ cistabplot <- ggplot(cistabdat, aes(x = time, y = Ct, color = sample)) +
         legend.position = "none") +
   scale_y_continuous(limits = c(30, 42), breaks = c(30, 34, 38, 42)) +
   labs(x = "Time", y = "Ct", color = "Sample")
-
 cistabplot
 
 # combining plots together
@@ -201,7 +198,7 @@ print(cikruskal_test)  # no significant difference, which is expected
 ## Comparing field and lab DNA concentration
 
 # bringing in dataset
-concdat <- read.csv("R:/Science/CESD/ABL/Project Files/AIS/APC0252 - R&D Field protocol for rapid AIS detection/Manuscript/Data analysis/dna_concentration_summary.csv")
+concdat <- read.csv("dna_concentration_summary.csv")
 concdat <- concdat[1:48, 1:3]
 
 # plotting values with linkage
