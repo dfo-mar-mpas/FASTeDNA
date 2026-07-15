@@ -1,13 +1,6 @@
-<table>
-  <tr>
-    <td valign="top">
-      <h1>FASTeDNA: a field-deployable, adaptable eDNA workflow for rapid detection and real-time aquatic surveillance</h1>
-    </td>
-    <td valign="top" width="225">
-      <img src="FastEDNA_hex.png" width="225" alt="FastEDNA Hex Sticker" title="Go granny, go!" />
-    </td>
-  </tr>
-</table>
+<img src="inst/FastEDNA_hex.png" align="right" height="180" alt="FastEDNA Hex Sticker" title="Go granny, go!" />
+
+**FASTeDNA: a field-deployable, adaptable eDNA workflow for rapid detection and real-time aquatic surveillance** 
 
 ## Abstract
 
