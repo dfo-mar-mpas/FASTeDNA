@@ -1,4 +1,4 @@
-<img src="inst/FastEDNA_hex.png" align="right" height="250" alt="FastEDNA Hex Sticker" title="Go granny, go!" />
+<img src="inst/FastEDNA_hex.png" align="left" height="250" alt="FastEDNA Hex Sticker" title="Go granny, go!" />
 
 ### FASTeDNA: a field-deployable, adaptable eDNA workflow for rapid detection and real-time aquatic surveillance 
 
