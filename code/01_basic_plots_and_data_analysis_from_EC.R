@@ -1,17 +1,21 @@
 ## basic scripts for data analysis and figure generation for FASTeDNA field lab manuscript
-
+### updated by Nick July 17 2026
 # loading relevant packages
 library(tidyverse)
 library(reshape2)
-library(cowplot)
+#library(cowplot)
 library(extrafont)
+library(ggplot2)
+library(dplyr)
+library(forcats)
+library(patchwork)
 
 ##########################
 ### field trial - Evan ###
 #########################
 
 # bring in curated data
-trialdat <- read.csv("field_trial_data.csv")
+trialdat <- read.csv("data/field_trial_data.csv")
 
 # setting the order of x-axis
 datorder <- c("STD High",	"STD Low",	"S1 (Lab)",	"S1 (Field)",	"S2 (Lab)",	"S2 (Field)",	"S3 (Lab)",	"S3 (Field)",	"Field Neg (Lab)",	"Field Neg (Field)",	"Extr. Neg (Lab)",	"Extr. Neg (Field)",	"NTC")
@@ -21,11 +25,13 @@ trialdat$sample <- factor(trialdat$sample, levels = datorder)
 ggplot(trialdat, aes(x = sample)) +
   geom_point(aes(y = ct_value, fill = assay_site), shape = 21, size = 3.5, position = position_dodge(0.5)) +
   geom_point(aes(y = dna_conc/2), shape = 8, size = 2) +
-  theme(axis.text.x = element_text(angle = 45, hjust =1, size = 8),
-        axis.title.y = element_text(margin = margin(r = 10))) +
   scale_y_continuous(sec.axis = sec_axis(~ . * 2, name = expression(paste("DNA Concentration (ng/",  mu, "L)"))  # Label and transformation for secondary y-axis
   )) +
-  labs(x = NULL, y = "Ct value", fill = "Assay Site")
+  labs(x = NULL, y = "Ct value", fill = "Assay Site")+
+  theme_bw()+
+  theme(axis.text.x = element_text(angle = 45, hjust =1, size = 8),
+        axis.title.y = element_text(margin = margin(r = 10)))
+  
 # maybe this is a useful way to represent data... maybe not!
 
 #######################################
@@ -33,67 +39,72 @@ ggplot(trialdat, aes(x = sample)) +
 #######################################
 
 # st anns bank (Anarhichas lupus)
-sadat <- read.csv("implementation_data_stannsbank.csv") %>% #
+sadat <- read.csv("data/implementation_data_stannsbank.csv") %>% #
   mutate(sample = fct_relevel(sample, "STD High", "STD Low", "Pos. Ctrl", "eDNA 1", "eDNA 2", "Extr. Neg", "NTC"))  # bringing in the data and setting the order fo x values for plotting
 
-sadatplot <- ggplot(sadat, aes(x = sample, y = ct_value, color = protocol)) +
-  geom_point(size = 3, position = position_dodge(0.2)) +  # making so you can see both y-values at same x-value
-  theme(axis.text.x = element_text(angle = 45, hjust =1, size = 8),    # angling x-axis labels
+sadatplot <- ggplot(sadat, aes(x = sample, y = ct_value, fill = protocol)) +
+  geom_point(size = 3, shape=21, position = position_dodge(0.2), colour="black") +
+  theme_bw()+ # making so you can see both y-values at same x-value
+  theme(axis.text.x = element_text(angle = 45, hjust =1, size = 10),    # angling x-axis labels
         axis.title.y = element_text(margin = margin(r = 10)),  # increasing distance from y-axis label to y-axis scale
         legend.position = "none",  # removing the colour key for multiplot
         plot.margin = margin(10, 25, 10, 10, unit = "pt")) + # changing the margins for better multiplot
   labs(x = NULL, y = "Ct value")  # choosing which labels to include
 
+sadatplot
 
 # halifax harbour (sargassum muticum)
-hhdat <- read.csv("implementation_data_hharbour.csv") %>%
+hhdat <- read.csv("data/implementation_data_hharbour.csv") %>%
   mutate(sample = fct_relevel(sample, "STD High", "STD Low", "Pos. Ctrl", "eDNA 1", "eDNA 2", "eDNA Neg", "Extr. Neg", "NTC"))
   
-hhdatplot <- ggplot(hhdat, aes(x = sample, y = ct_value, color = protocol)) +
-  geom_point(size = 3, position = position_dodge(0.2)) +
-  theme(axis.text.x = element_text(angle = 45, hjust =1, size = 8),
+hhdatplot <- ggplot(hhdat, aes(x = sample, y = ct_value, fill = protocol)) +
+  geom_point(size = 3, position = position_dodge(0.2), shape=21, colour="black") +
+  theme_bw()+
+  theme(axis.text.x = element_text(angle = 45, hjust =1, size = 10),
         axis.title.y = element_text(margin = margin(r = 10)),
         plot.margin = margin(10, 2, 10, 2, unit = "pt"), 
         legend.position = "none") +
-  labs(x = NULL, y = NULL, color = "Protocol")
+  labs(x = NULL, y = NULL, color = "Protocol");hhdatplot
 
 
 # hmcs william hall (Semibalanus balanoides)
-whdat <- read.csv("implementation_data_williamhall.csv") %>%
+whdat <- read.csv("data/implementation_data_williamhall.csv") %>%
   mutate(sample = fct_relevel(sample, "STD High", "STD Low", "Pos. Ctrl", "eDNA 1", "eDNA 2", "eDNA Neg", "Extr. Neg", "NTC"))
 
 
-whdatplot <- ggplot(whdat, aes(x = sample, y = ct_value, color = protocol)) +
-  geom_point(size = 3, position = position_dodge(0.2)) +
-  theme(axis.text.x = element_text(angle = 45, hjust =1, size = 8),
+whdatplot <- ggplot(whdat, aes(x = sample, y = ct_value, fill = protocol)) +
+  geom_point(size = 3, position = position_dodge(0.2), shape = 21, colour="black") +
+  theme_bw()+
+  theme(axis.text.x = element_text(angle = 45, hjust =1, size = 10),
         axis.title.y = element_text(margin = margin(r = 10)),
         plot.margin = margin(10, 2, 10, 2, unit = "pt"), 
   legend.position = "none") +
-  labs(x = "Sample", y = NULL, color = "Protocol")
+  labs(x = "Sample", y = NULL, color = "Protocol");whdatplot
   
 
 # three mile lake  (Procambarus clarkii)
-tmldat <- read.csv("implementation_data_threemile.csv") %>%
+tmldat <- read.csv("data/implementation_data_threemile.csv") %>%
   mutate(sample = fct_relevel(sample, "STD High", "STD Low", "Pos. Ctrl", "eDNA 1", "eDNA 2", "Extr. Neg", "NTC"))
 
-tmldatplot <- ggplot(tmldat, aes(x = sample, y = ct_value, color = protocol)) +
-  geom_point(size = 3, position = position_dodge(0.2)) +
-  theme(axis.text.x = element_text(angle = 45, hjust =1, size = 8),
+tmldatplot <- ggplot(tmldat, aes(x = sample, y = ct_value, fill = protocol)) +
+  geom_point(size = 3, position = position_dodge(0.2), shape=21, colour= "black") +
+  theme_bw()+
+  theme(axis.text.x = element_text(angle = 45, hjust =1, size = 10),
         axis.title.y = element_text(margin = margin(r = 10)),
         plot.margin = margin(10, 25, 10, 10, unit = "pt"), 
         legend.position = "none") +
-  labs(x = "Sample", y = "Ct value")
+  labs(x = "Sample", y = "Ct value");tmldatplot
 
 
 # combining all plots
 combplot <- plot_grid(sadatplot, hhdatplot, tmldatplot, whdatplot, ncol = 2, nrow = 2, labels = "AUTO", align = "hv")
 
 #extracting a legend for sharing between plots
-hhdatplotleg <- ggplot(hhdat, aes(x = sample, y = ct_value, color = protocol)) +
-  geom_point(size = 3, position = position_dodge(0.2)) +
+hhdatplotleg <- ggplot(hhdat, aes(x = sample, y = ct_value, fill = protocol)) +
+  geom_point(size = 3, position = position_dodge(0.2), shape=21, colour="black") +
   theme(axis.text.x = element_text(angle = 45, hjust =1, size = 8),
         axis.title.y = element_text(margin = margin(r = 10))) +
-  labs(x = NULL, y = NULL, color = "Protocol")
+  labs(x = NULL, y = NULL, fill = "Protocol")
 
 legplot <- get_legend(hhdatplotleg)  #
 
@@ -101,35 +112,38 @@ legplot <- get_legend(hhdatplotleg)  #
 plot_grid(combplot, legplot, ncol = 2, rel_widths = c(1,0.1))
 
 
+(sadatplot + hhdatplot) / (tmldatplot + whdatplot)
 
 ##################################################################
 ## visualizing assay stability test (prepared assays stored at RT)
 # bring in the data for B. schlosseri
-bsstabdat <- read.csv("b_schlosseri_assay_stability_data.csv") %>%
+bsstabdat <- read.csv("data/b_schlosseri_assay_stability_data.csv") %>%
   filter(!is.na(Ct))
 
 #plotting Ct values by time point
-bsstabplotforleg <- ggplot(bsstabdat, aes(x = time, y = Ct, color = sample)) +
-  geom_point(size = 3, position = position_dodge(0.1)) +
-  theme(axis.text.x = element_text(angle = 45, hjust =1, size = 8),
+bsstabplotforleg <- ggplot(bsstabdat, aes(x = time, y = Ct, fill = sample)) +
+  geom_point(size = 3, position = position_dodge(0.1), shape=21, colour = "black") +
+  theme_bw()+
+  theme(axis.text.x = element_text(angle = 45, hjust =1, size = 10),
         axis.title.y = element_text(margin = margin(r = 5))) +
   scale_y_continuous(limits = c(30, 42), breaks = c(30, 34, 38, 42)) +
   labs(x = NULL, y = "Ct", color = "Sample")
 
 stablegplot <- get_legend(bsstabplotforleg) 
 
-bsstabplot <- ggplot(bsstabdat, aes(x = time, y = Ct, color = sample)) +
-  geom_point(size = 3, position = position_dodge(0.1)) +
-  theme(axis.text.x = element_text(angle = 45, hjust =1, size = 8),
-        axis.title.y = element_text(margin = margin(r = 5)),
-        legend.position = "none") +
+bsstabplot <- ggplot(bsstabdat, aes(x = time, y = Ct, fill = sample)) +
+  geom_point(size = 3, position = position_dodge(0.1), shape=21, colour="black") +
   scale_y_continuous(limits = c(30, 42), breaks = c(30, 34, 38, 42)) +
+  theme_bw()+
+  theme(axis.text.x = element_text(angle = 45, hjust =1, size = 10),
+        axis.title.y = element_text(margin = margin(r = 5)),
+        legend.position = "right") +
   labs(x = NULL, y = "Ct", color = "Sample")
 bsstabplot
 
 
 # now for C. intestinalis
-cistabdat <- read.csv("c_intestinalis_assay_stability_data.csv") %>%
+cistabdat <- read.csv("data/c_intestinalis_assay_stability_data.csv") %>%
   filter(!is.na(Ct))
 
 #plotting Ct values by time point
