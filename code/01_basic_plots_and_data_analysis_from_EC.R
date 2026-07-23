@@ -45,7 +45,10 @@ sadat <- read.csv("data/implementation_data_stannsbank.csv") %>% #
 sadatplot <- ggplot(sadat, aes(x = sample, y = ct_value, fill = protocol)) +
   geom_point(size = 3, shape=21, position = position_dodge(0.2), colour="black") +
   theme_bw()+ # making so you can see both y-values at same x-value
-  theme(axis.text.x = element_text(angle = 45, hjust =1, size = 10),    # angling x-axis labels
+  theme(axis.title.x = element_blank(),
+        axis.text.x = element_blank(),
+        axis.ticks.x = element_blank(),
+        #axis.text.x = element_text(angle = 45, hjust =1, size = 10),    # angling x-axis labels
         axis.title.y = element_text(margin = margin(r = 10)),  # increasing distance from y-axis label to y-axis scale
         legend.position = "none",  # removing the colour key for multiplot
         plot.margin = margin(10, 25, 10, 10, unit = "pt")) + # changing the margins for better multiplot
@@ -60,7 +63,10 @@ hhdat <- read.csv("data/implementation_data_hharbour.csv") %>%
 hhdatplot <- ggplot(hhdat, aes(x = sample, y = ct_value, fill = protocol)) +
   geom_point(size = 3, position = position_dodge(0.2), shape=21, colour="black") +
   theme_bw()+
-  theme(axis.text.x = element_text(angle = 45, hjust =1, size = 10),
+  theme(axis.title.x = element_blank(),
+        axis.text.x = element_blank(),
+        axis.ticks.x = element_blank(),
+        #axis.text.x = element_text(angle = 45, hjust =1, size = 10),
         axis.title.y = element_text(margin = margin(r = 10)),
         plot.margin = margin(10, 2, 10, 2, unit = "pt"), 
         legend.position = "none") +
@@ -109,10 +115,21 @@ hhdatplotleg <- ggplot(hhdat, aes(x = sample, y = ct_value, fill = protocol)) +
 legplot <- get_legend(hhdatplotleg)  #
 
 # plotting all together with shared legend
-plot_grid(combplot, legplot, ncol = 2, rel_widths = c(1,0.1))
+#plot_grid(combplot, legplot, ncol = 2, rel_widths = c(1,0.1))
 
 
-(sadatplot + hhdatplot) / (tmldatplot + whdatplot)
+(sadatplot + hhdatplot) / (tmldatplot + whdatplot) +
+  plot_annotation(tag_levels = "A")+
+  plot_layout(guides = "collect") & #learned here that the & symbol means the theme line below applies legend to the whole grid rather than just the last plot in the grid!
+  theme(legend.position = "bottom")
+
+ggsave(filename = "4panel_comboPlot.png", 
+       plot = last_plot(), 
+       device = "png", 
+       path = "./figures/", 
+       width = 10, 
+       height =8, 
+       dpi = 300)
 
 ##################################################################
 ## visualizing assay stability test (prepared assays stored at RT)
