@@ -3,12 +3,13 @@
 # loading relevant packages
 library(tidyverse)
 library(reshape2)
-#library(cowplot)
+library(cowplot)
 library(extrafont)
 library(ggplot2)
 library(dplyr)
 library(forcats)
 library(patchwork)
+library(rphylopic)
 
 ##########################
 ### field trial - Evan ###
@@ -44,6 +45,7 @@ sadat <- read.csv("data/implementation_data_stannsbank.csv") %>% #
 
 sadatplot <- ggplot(sadat, aes(x = sample, y = ct_value, fill = protocol)) +
   geom_point(size = 3, shape=21, position = position_dodge(0.2), colour="black") +
+  add_phylopic(name = "Wolffish", x=1, y=30)+
   theme_bw()+ # making so you can see both y-values at same x-value
   theme(axis.title.x = element_blank(),
         axis.text.x = element_blank(),
@@ -80,7 +82,8 @@ whdat <- read.csv("data/implementation_data_williamhall.csv") %>%
 
 whdatplot <- ggplot(whdat, aes(x = sample, y = ct_value, fill = protocol)) +
   geom_point(size = 3, position = position_dodge(0.2), shape = 21, colour="black") +
-  theme_bw()+
+  add_phylopic(name="Balanus", x=8, y=35, height = 7)+
+    theme_bw()+
   theme(axis.text.x = element_text(angle = 45, hjust =1, size = 10),
         axis.title.y = element_text(margin = margin(r = 10)),
         plot.margin = margin(10, 2, 10, 2, unit = "pt"), 
@@ -94,6 +97,7 @@ tmldat <- read.csv("data/implementation_data_threemile.csv") %>%
 
 tmldatplot <- ggplot(tmldat, aes(x = sample, y = ct_value, fill = protocol)) +
   geom_point(size = 3, position = position_dodge(0.2), shape=21, colour= "black") +
+  add_phylopic(name="Procambarus clarkii", x=7, y=38,horizontal = T, angle = 270, height = 6)+
   theme_bw()+
   theme(axis.text.x = element_text(angle = 45, hjust =1, size = 10),
         axis.title.y = element_text(margin = margin(r = 10)),
@@ -152,8 +156,9 @@ bsstabplot <- ggplot(bsstabdat, aes(x = time, y = Ct, fill = sample)) +
   geom_point(size = 3, position = position_dodge(0.1), shape=21, colour="black") +
   scale_y_continuous(limits = c(30, 42), breaks = c(30, 34, 38, 42)) +
   theme_bw()+
-  theme(axis.text.x = element_text(angle = 45, hjust =1, size = 10),
+  theme(axis.text.x = element_text(angle = 45, hjust =1),
         axis.title.y = element_text(margin = margin(r = 5)),
+        text = element_text(size = 16),
         legend.position = "right") +
   labs(x = NULL, y = "Ct", color = "Sample")
 bsstabplot
@@ -164,26 +169,31 @@ cistabdat <- read.csv("data/c_intestinalis_assay_stability_data.csv") %>%
   filter(!is.na(Ct))
 
 #plotting Ct values by time point
-cistabplot <- ggplot(cistabdat, aes(x = time, y = Ct, color = sample)) +
-  geom_point(size = 3, position = position_dodge(0.1)) +
-  theme(axis.text.x = element_text(angle = 45, hjust =1, size = 8, margin = margin(r = 8)),
+cistabplot <- ggplot(cistabdat, aes(x = time, y = Ct, fill = sample)) +
+  geom_point(size = 3, position = position_dodge(0.1), shape=21, colour="black") +
+  theme_bw()+
+  theme(axis.text.x = element_text(angle = 45, hjust =1, margin = margin(r = 8)),
         axis.title.y = element_text(margin = margin(r = 5)),
+        text=element_text(size=16),
         legend.position = "none") +
   scale_y_continuous(limits = c(30, 42), breaks = c(30, 34, 38, 42)) +
   labs(x = "Time", y = "Ct", color = "Sample")
 cistabplot
 
 # combining plots together
-stabcombplot <- plot_grid(bsstabplot, cistabplot, ncol = 1, nrow = 2, labels = c("B. schlosseri", "C. intestinalis"),
-                          label_size = 10,
-                          vjust = 0.1,
-                          hjust = -0.1,
-                          align = "hv")
-stabcombplot
+bsstabplot/cistabplot + 
+  plot_annotation(tag_levels = "A")+
+  plot_layout(guides = "collect") & #learned here that the & symbol means the theme line below applies legend to the whole grid rather than just the last plot in the grid!
+  theme(legend.position = "bottom")
 
-stabfinplot <- plot_grid(stabcombplot, stablegplot, ncol = 2, rel_widths = c(1,0.2))
+ggsave(filename = "stability_test_2panel.png", 
+       plot = last_plot(), 
+       device = "png", 
+       path = "./figures/", 
+       width = 10, 
+       height =8, 
+       dpi = 300)
 
-stabfinplot + theme(plot.margin = margin(0.5,0.5,0.5,0.5, "cm"))
 
 ## test statistics for Ct values between time points
 # trying Kruskal-Wallis test to test averages between values between the three groups (time), not assuming data normality
@@ -205,17 +215,28 @@ print(cikruskal_test)  # no significant difference, which is expected
 ## Comparing field and lab DNA concentration
 
 # bringing in dataset
-concdat <- read.csv("dna_concentration_summary.csv")
+concdat <- read.csv("data/dna_concentration_summary.csv")
 concdat <- concdat[1:48, 1:3]
 
 # plotting values with linkage
 dnacompareplot <- ggplot(concdat, aes(location, dna_conc)) +
                   geom_line(aes(group=Test), color="gray20", size=0.5, alpha=0.5) +
-                  geom_point(aes(color=Test),size=3.5) +
-                  scale_color_viridis_c(option = "viridis") +
-                  theme(legend.position = "none") +
-                  labs(x = "Extraction Protocol", y = "DNA Concentration")
+                  geom_point(aes(fill=Test),shape=21, colour="black", size=4) +
+                  scale_fill_viridis_b(option = "viridis") +
+                  scale_x_discrete(expand = expansion(mult=c(0.1,0.1)))+
+                  theme_bw()+
+                  theme(legend.position = "none",
+                        text=element_text(size=16)) +
+                  labs(x = "Extraction Protocol", y = "DNA Concentration (ng/ul)")
 dnacompareplot
+
+ggsave(filename = "dna_concentration_plot.png", 
+       plot = dnacompareplot, 
+       device = "png", 
+       path = "./figures/", 
+       width = 8, 
+       height =8, 
+       dpi = 300)
 
 # testing data for normality
 sw_test <- shapiro.test(concdat$dna_conc)
@@ -228,7 +249,7 @@ dnatestdat <- pivot_wider(concdat, names_from = location, values_from = dna_conc
 t_test <- t.test(dnatestdat$lab, dnatestdat$field, paired = TRUE)
 print(t_test)
                     
-# Trying Wilcocoxon sign (for paired continuous data, independent observations, not normally distributed)
+# Trying Wilcoxon sign (for paired continuous data, independent observations, not normally distributed)
 # have to remove zero values
 dnatestdatw <- dnatestdat %>% filter(lab !=0) 
 
