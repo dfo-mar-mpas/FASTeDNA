@@ -64,6 +64,7 @@ hhdat <- read.csv("data/implementation_data_hharbour.csv") %>%
   
 hhdatplot <- ggplot(hhdat, aes(x = sample, y = ct_value, fill = protocol)) +
   geom_point(size = 3, position = position_dodge(0.2), shape=21, colour="black") +
+  add_phylopic(name="Fucus serratus", x=7.8, y=32, height=6)+
   theme_bw()+
   theme(axis.title.x = element_blank(),
         axis.text.x = element_blank(),
@@ -97,7 +98,7 @@ tmldat <- read.csv("data/implementation_data_threemile.csv") %>%
 
 tmldatplot <- ggplot(tmldat, aes(x = sample, y = ct_value, fill = protocol)) +
   geom_point(size = 3, position = position_dodge(0.2), shape=21, colour= "black") +
-  add_phylopic(name="Procambarus clarkii", x=7, y=38,horizontal = T, angle = 270, height = 6)+
+  add_phylopic(name="Procambarus clarkii", x=6.8, y=38,horizontal = T, angle = 270, height = 6)+
   theme_bw()+
   theme(axis.text.x = element_text(angle = 45, hjust =1, size = 10),
         axis.title.y = element_text(margin = margin(r = 10)),
@@ -257,3 +258,15 @@ w_test <- wilcox.test(dnatestdatw$lab, dnatestdatw$field, paired = TRUE)
 print(w_test)
 
 
+
+# Field trial data --------------------------------------------------------
+
+fieldat <- read.csv("data/field_trial_data.csv", header = T) %>% glimpse()
+
+# try a plot with points and lines connecting the groups
+
+ggplot(data=fieldat, aes(x=assay_site, y=ct_value, fill=sample))+
+  geom_point(shape=21, colour="black", size=3.5)+
+  geom_line(aes(group=sample), color="gray20", size=0.5, alpha=0.5) +
+  labs(x="Assay Site", y="Ct")+
+  theme_bw()
