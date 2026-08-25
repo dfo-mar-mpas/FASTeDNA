@@ -13,3 +13,4 @@ Environmental DNA (eDNA) has emerged as a powerful tool for monitoring and surve
 
 #See the system in action on the [FASTeDNA youtube channel](https://www.youtube.com/@FASTeDNA) 
 
+<img src="inst/Flow diagram of FASTeDNA process.jpg" align="middle" height="1000" />
