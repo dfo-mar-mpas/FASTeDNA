@@ -117,13 +117,6 @@ get_basemap <- function(data, area, buffer_km = 20, zoom = 10,
 }
 
 
-# Halifax Basin
-basemap_HB <- get_basemap(
-  map_coords,
-  area="HB",
-  buffer_km = 4,
-  zoom = 12
-)
 
 # Manitoba
 basemap_MB <- get_basemap(
@@ -151,8 +144,8 @@ extent_coords <- map_coords%>%
 basemap_NS <- get_basemap(
   extent_coords,
   "NS",
-  buffer_km = 55,
-  zoom = 10
+  buffer_km = 90,
+  zoom = 8
 )
 
 
@@ -237,6 +230,14 @@ p_allsites
   # Halifax Basin
   # ------------------------------------------------------------
   
+  # Halifax Basin
+  basemap_HB <- get_basemap(
+    map_coords,
+    area="HB",
+    buffer_km = 4,
+    zoom = 12
+  )
+  
   HB_plot <- ggplot() +
     layer_spatial(basemap_HB) +
     geom_sf(
@@ -264,7 +265,8 @@ p_allsites
       size = 2
     ) +
     coord_sf(crs = 3857,expand=0) +
-    annotation_scale(location="br")+
+    annotation_scale(location = "bl",text_cex = 0.5,
+                     height = unit(0.15, "cm"))+
     theme_bw()
   
   ggsave("output/manplot.png",man_plot,dpi=300,units="in",height=12)
@@ -293,7 +295,8 @@ p_allsites
       colour = "black"
     ) +
     coord_sf(crs = 3857, expand = 0, label_axes = "-NE-")+
-    annotation_scale(location = "bl") +
+    annotation_scale(location = "bl",text_cex = 0.5,
+                     height = unit(0.15, "cm")) +
     theme_bw() 
   
   ggsave("output/nsplot.png",ns_plot,dpi=300,units="in",height=12)
@@ -314,7 +317,7 @@ p_allsites
   combined_plot <- man_plot + ns_plot +
     plot_layout(nrow = 1, widths = c(aspect_mb, aspect_ns))
   
-  combined_plot <- combined_plot & theme(axis.text = element_text(size = rel(0.5)))
+  combined_plot <- combined_plot & theme(axis.text = element_text(size = rel(0.4)))
   
   ggsave("output/combined_map.png", combined_plot, dpi = 300, units = "in")
   trim_img_ws("output/combined_map.png")
@@ -328,7 +331,7 @@ p_allsites
   edna_bbox <- map_coords%>%
                st_bbox()%>%
                st_as_sfc()%>%
-               st_buffer(1)%>% # one degree buffer will trigger warning
+               st_buffer(5)%>% # degree buffer will trigger warning
                st_bbox()
   
   center_pt <- edna_bbox%>%
@@ -356,6 +359,19 @@ p_allsites
     st_set_crs(latlong)%>%
     st_as_sfc()%>%
     st_transform(globe_crs)
+  
+  mb_globe <- basemap_MB%>%
+              st_bbox()%>%
+              st_as_sfc()%>%
+              st_transform(globe_crs)
+ 
+  ns_globe <- ns_coast%>%
+              st_bbox()%>%
+              st_as_sfc()%>%
+              st_transform(globe_crs)
+  
+  inset_centres <- rbind(mb_globe%>%st_centroid()%>%st_as_sf(),
+                         ns_globe%>%st_centroid()%>%st_as_sf())
   
   #make a circle to wrap the globe plot
   
@@ -395,6 +411,20 @@ p_allsites
       colour = "black",
       linewidth = 0.9
     ) +
+    geom_sf(data=inset_centres)+
+    # geom_sf(
+    #   data = mb_globe, ## too small to see on the map
+    #   fill = NA,
+    #   colour = "black",
+    #   linewidth = 0.9
+    # ) +
+    # 
+    # geom_sf(
+    #   data = ns_globe,
+    #   fill = NA,
+    #   colour = "black",
+    #   linewidth = 0.9
+    # ) +
     geom_sf(data = globe_circle,
             fill = NA,
             colour = "grey30",
@@ -415,4 +445,29 @@ p_allsites
     bg = "transparent"
   )
   
+  # ------------------------------------------------------------
+  # Figure 6 Basin mosaic inset
+  # ------------------------------------------------------------
+  
+  basin_inset <- get_area_bbox(map_coords%>%filter(site=="BIO - Floating Marina"), "HB", 3)
+  
+  basemap_HB_hr <- get_basemap(
+    map_coords%>%filter(site=="BIO - Floating Marina"),
+    area="HB",
+    buffer_km = 0.25,
+    zoom = 18
+  )
+  
+  p1_hb <- ggplot() +
+    layer_spatial(basemap_HB_hr) +
+    geom_sf(
+      data = map_coords%>%filter(site=="BIO - Floating Marina"),
+      size = 2
+    ) +
+    coord_sf(crs = 3857,expand=0) +
+    theme_bw()+
+    annotation_scale(location="br")
+  
+  ggsave("output/hb_zoom.png",p1_hb,height=6,width=6,units="in",dpi=300)
+  trim_img_ws("output/hb_zoom.png")
   
