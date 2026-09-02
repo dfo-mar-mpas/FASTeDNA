@@ -52,7 +52,7 @@ sadatplot <- ggplot(sadat, aes(x = sample, y = ct_value, fill = protocol)) +
         axis.text.x = element_blank(),
         axis.ticks.x = element_blank(),
         #axis.text.x = element_text(angle = 45, hjust =1, size = 10),    # angling x-axis labels
-        axis.title.y = element_text(margin = margin(r = 10)),  # increasing distance from y-axis label to y-axis scale
+        axis.title.y = element_text(margin = margin(r = 10), size=14),  # increasing distance from y-axis label to y-axis scale
         legend.position = "none",  # removing the colour key for multiplot
         plot.margin = margin(10, 25, 10, 10, unit = "pt")) + # changing the margins for better multiplot
   labs(x = NULL, y = "Ct value")  # choosing which labels to include
@@ -86,8 +86,9 @@ whdatplot <- ggplot(whdat, aes(x = sample, y = ct_value, fill = protocol)) +
   geom_point(size = 3, position = position_dodge(0.2), shape = 21, colour="black") +
   add_phylopic(name="Balanus", x=8, y=35, height = 7)+
     theme_bw()+
-  theme(axis.text.x = element_text(angle = 45, hjust =1, size = 14),
-        axis.title.y = element_text(margin = margin(r = 10)),
+  theme(axis.text.x = element_text(angle = 45, hjust =1, size = 13),
+        axis.title.x = element_text(size=14),
+        axis.title.y = element_text(margin = margin(r = 10), size=14),
         plot.margin = margin(10, 2, 10, 2, unit = "pt"), 
   legend.position = "none") +
   labs(x = "Sample", y = NULL, color = "Protocol");whdatplot
@@ -101,8 +102,9 @@ tmldatplot <- ggplot(tmldat, aes(x = sample, y = ct_value, fill = protocol)) +
   geom_point(size = 3, position = position_dodge(0.2), shape=21, colour= "black") +
   add_phylopic(name="Procambarus clarkii", x=6.8, y=38,horizontal = T, angle = 270, height = 7)+
   theme_bw()+
-  theme(axis.text.x = element_text(angle = 45, hjust =1, size = 11),
-        axis.title.y = element_text(margin = margin(r = 10)),
+  theme(axis.text.x = element_text(angle = 45, hjust =1, size = 13),
+        axis.title.x = element_text(size=14),
+        axis.title.y = element_text(margin = margin(r = 10), size=14),
         plot.margin = margin(10, 25, 10, 10, unit = "pt"), 
         legend.position = "none") +
   labs(x = "Sample", y = "Ct value");tmldatplot
@@ -127,7 +129,9 @@ tmldatplot <- ggplot(tmldat, aes(x = sample, y = ct_value, fill = protocol)) +
 (sadatplot + hhdatplot) / (tmldatplot + whdatplot) +
   plot_annotation(tag_levels = "A")+
   plot_layout(guides = "collect") & #learned here that the & symbol means the theme line below applies legend to the whole grid rather than just the last plot in the grid!
-  theme(legend.position = "bottom")
+  theme(legend.position = "bottom",
+        legend.text = element_text(size=14),
+        legend.title = element_text(size=14))
 
 ggsave(filename = "4panel_comboPlot.png", 
        plot = last_plot(), 
