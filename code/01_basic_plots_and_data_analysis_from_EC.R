@@ -24,7 +24,8 @@ trialdat$sample <- factor(trialdat$sample, levels = datorder)
 
 # plotting Ct values and DNA concentration simultaneously to see what this looks like...
 ggplot(trialdat, aes(x = sample)) +
-  geom_point(aes(y = ct_value, fill = assay_site), shape = 21, size = 3.5, position = position_dodge(0.5)) +
+  geom_point(aes(y = ct_value, fill = assay_site), shape = 21, size = 3.5, 
+             position = position_dodge(0.5)) +
   geom_point(aes(y = dna_conc/2), shape = 8, size = 2) +
   scale_y_continuous(sec.axis = sec_axis(~ . * 2, name = expression(paste("DNA Concentration (ng/",  mu, "L)"))  # Label and transformation for secondary y-axis
   )) +
@@ -45,7 +46,7 @@ sadat <- read.csv("data/implementation_data_stannsbank.csv") %>% #
 
 sadatplot <- ggplot(sadat, aes(x = sample, y = ct_value, fill = protocol)) +
   geom_point(size = 3, shape=21, position = position_dodge(0.2), colour="black") +
-  add_phylopic(name = "Wolffish", x=1, y=30)+
+  add_phylopic(name = "Anarhichas denticulatus", x=7, y=35, height = 5)+
   theme_bw()+ # making so you can see both y-values at same x-value
   theme(axis.title.x = element_blank(),
         axis.text.x = element_blank(),
@@ -64,7 +65,7 @@ hhdat <- read.csv("data/implementation_data_hharbour.csv") %>%
   
 hhdatplot <- ggplot(hhdat, aes(x = sample, y = ct_value, fill = protocol)) +
   geom_point(size = 3, position = position_dodge(0.2), shape=21, colour="black") +
-  add_phylopic(name="Fucus serratus", x=7.8, y=32, height=6)+
+  add_phylopic(name="Fucus serratus", x=8, y=30, height=10)+
   theme_bw()+
   theme(axis.title.x = element_blank(),
         axis.text.x = element_blank(),
@@ -85,7 +86,7 @@ whdatplot <- ggplot(whdat, aes(x = sample, y = ct_value, fill = protocol)) +
   geom_point(size = 3, position = position_dodge(0.2), shape = 21, colour="black") +
   add_phylopic(name="Balanus", x=8, y=35, height = 7)+
     theme_bw()+
-  theme(axis.text.x = element_text(angle = 45, hjust =1, size = 10),
+  theme(axis.text.x = element_text(angle = 45, hjust =1, size = 14),
         axis.title.y = element_text(margin = margin(r = 10)),
         plot.margin = margin(10, 2, 10, 2, unit = "pt"), 
   legend.position = "none") +
@@ -98,9 +99,9 @@ tmldat <- read.csv("data/implementation_data_threemile.csv") %>%
 
 tmldatplot <- ggplot(tmldat, aes(x = sample, y = ct_value, fill = protocol)) +
   geom_point(size = 3, position = position_dodge(0.2), shape=21, colour= "black") +
-  add_phylopic(name="Procambarus clarkii", x=6.8, y=38,horizontal = T, angle = 270, height = 6)+
+  add_phylopic(name="Procambarus clarkii", x=6.8, y=38,horizontal = T, angle = 270, height = 7)+
   theme_bw()+
-  theme(axis.text.x = element_text(angle = 45, hjust =1, size = 10),
+  theme(axis.text.x = element_text(angle = 45, hjust =1, size = 11),
         axis.title.y = element_text(margin = margin(r = 10)),
         plot.margin = margin(10, 25, 10, 10, unit = "pt"), 
         legend.position = "none") +
@@ -108,16 +109,16 @@ tmldatplot <- ggplot(tmldat, aes(x = sample, y = ct_value, fill = protocol)) +
 
 
 # combining all plots
-combplot <- plot_grid(sadatplot, hhdatplot, tmldatplot, whdatplot, ncol = 2, nrow = 2, labels = "AUTO", align = "hv")
+#combplot <- plot_grid(sadatplot, hhdatplot, tmldatplot, whdatplot, ncol = 2, nrow = 2, labels = "AUTO", align = "hv")
 
 #extracting a legend for sharing between plots
-hhdatplotleg <- ggplot(hhdat, aes(x = sample, y = ct_value, fill = protocol)) +
-  geom_point(size = 3, position = position_dodge(0.2), shape=21, colour="black") +
-  theme(axis.text.x = element_text(angle = 45, hjust =1, size = 8),
-        axis.title.y = element_text(margin = margin(r = 10))) +
-  labs(x = NULL, y = NULL, fill = "Protocol")
-
-legplot <- get_legend(hhdatplotleg)  #
+# hhdatplotleg <- ggplot(hhdat, aes(x = sample, y = ct_value, fill = protocol)) +
+#   geom_point(size = 3, position = position_dodge(0.2), shape=21, colour="black") +
+#   theme(axis.text.x = element_text(angle = 45, hjust =1, size = 8),
+#         axis.title.y = element_text(margin = margin(r = 10))) +
+#   labs(x = NULL, y = NULL, fill = "Protocol")
+# 
+# legplot <- get_legend(hhdatplotleg)  #
 
 # plotting all together with shared legend
 #plot_grid(combplot, legplot, ncol = 2, rel_widths = c(1,0.1))
@@ -134,7 +135,7 @@ ggsave(filename = "4panel_comboPlot.png",
        path = "./figures/", 
        width = 10, 
        height =8, 
-       dpi = 300)
+       dpi = 400)
 
 ##################################################################
 ## visualizing assay stability test (prepared assays stored at RT)
