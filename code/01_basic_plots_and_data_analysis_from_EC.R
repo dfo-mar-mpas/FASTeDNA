@@ -46,7 +46,7 @@ sadat <- read.csv("data/implementation_data_stannsbank.csv") %>% #
 
 sadatplot <- ggplot(sadat, aes(x = sample, y = ct_value, fill = protocol)) +
   geom_point(size = 3, shape=21, position = position_dodge(0.2), colour="black") +
-  add_phylopic(name = "Anarhichas denticulatus", x=7, y=35, height = 5)+
+  add_phylopic(name = "Anarhichas denticulatus", x=6.7, y=35, height = 5)+
   theme_bw()+ # making so you can see both y-values at same x-value
   theme(axis.title.x = element_blank(),
         axis.text.x = element_blank(),
@@ -149,7 +149,10 @@ bsstabdat <- read.csv("data/b_schlosseri_assay_stability_data.csv") %>%
 
 #plotting Ct values by time point
 bsstabplotforleg <- ggplot(bsstabdat, aes(x = time, y = Ct, fill = sample)) +
-  geom_point(size = 3, position = position_dodge(0.1), shape=21, colour = "black") +
+  geom_point(size = 3, 
+             #position = position_dodge(0.1), 
+             shape=21,
+             colour = "black") +
   theme_bw()+
   theme(axis.text.x = element_text(angle = 45, hjust =1, size = 10),
         axis.title.y = element_text(margin = margin(r = 5))) +
@@ -159,7 +162,10 @@ bsstabplotforleg <- ggplot(bsstabdat, aes(x = time, y = Ct, fill = sample)) +
 stablegplot <- get_legend(bsstabplotforleg) 
 
 bsstabplot <- ggplot(bsstabdat, aes(x = time, y = Ct, fill = sample)) +
-  geom_point(size = 3, position = position_dodge(0.1), shape=21, colour="black") +
+  geom_point(size = 3,
+             #position = position_dodge(0.1), 
+             shape=21, 
+             colour="black") +
   scale_y_continuous(limits = c(30, 42), breaks = c(30, 34, 38, 42)) +
   theme_bw()+
   theme(axis.text.x = element_text(angle = 45, hjust =1),
@@ -176,7 +182,10 @@ cistabdat <- read.csv("data/c_intestinalis_assay_stability_data.csv") %>%
 
 #plotting Ct values by time point
 cistabplot <- ggplot(cistabdat, aes(x = time, y = Ct, fill = sample)) +
-  geom_point(size = 3, position = position_dodge(0.1), shape=21, colour="black") +
+  geom_point(size = 3, 
+             #position = position_dodge(0.1), 
+             shape=21, 
+             colour="black") +
   theme_bw()+
   theme(axis.text.x = element_text(angle = 45, hjust =1, margin = margin(r = 8)),
         axis.title.y = element_text(margin = margin(r = 5)),
@@ -198,7 +207,7 @@ ggsave(filename = "stability_test_2panel.png",
        path = "./figures/", 
        width = 10, 
        height =8, 
-       dpi = 300)
+       dpi = 320)
 
 
 ## test statistics for Ct values between time points
