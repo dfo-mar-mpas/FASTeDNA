@@ -11,36 +11,36 @@ STD Low,Field,NA
 STD Low,Lab,33.9
 STD Low,Lab,34.3
 STD Low,Lab,34
-eDNA 1,Field,NA
-eDNA 1,Field,NA
-eDNA 1,Field,NA
-eDNA 1,Lab,NA
-eDNA 1,Lab,NA
-eDNA 1,Lab,NA
-eDNA 2,Field,NA
-eDNA 2,Field,NA
-eDNA 2,Field,NA
-eDNA 2,Lab,NA
-eDNA 2,Lab,NA
-eDNA 2,Lab,NA
+eDNA 1,Field,0
+eDNA 1,Field,0
+eDNA 1,Field,0
+eDNA 1,Lab,0
+eDNA 1,Lab,0
+eDNA 1,Lab,0
+eDNA 2,Field,0
+eDNA 2,Field,0
+eDNA 2,Field,0
+eDNA 2,Lab,0
+eDNA 2,Lab,0
+eDNA 2,Lab,0
+eDNA Neg,Field,0
+eDNA Neg,Field,0
 eDNA Neg,Field,NA
-eDNA Neg,Field,NA
-eDNA Neg,Field,NA
-eDNA Neg,Lab,NA
-eDNA Neg,Lab,NA
-eDNA Neg,Lab,NA
+eDNA Neg,Lab,0
+eDNA Neg,Lab,0
+eDNA Neg,Lab,0
+Extr. Neg,Field,0
+Extr. Neg,Field,0
 Extr. Neg,Field,NA
-Extr. Neg,Field,NA
-Extr. Neg,Field,NA
-Extr. Neg,Lab,NA
-Extr. Neg,Lab,NA
-Extr. Neg,Lab,NA
+Extr. Neg,Lab,0
+Extr. Neg,Lab,0
+Extr. Neg,Lab,0
+NTC,Field,0
 NTC,Field,NA
 NTC,Field,NA
-NTC,Field,NA
-NTC,Lab,NA
-NTC,Lab,NA
-NTC,Lab,NA
+NTC,Lab,0
+NTC,Lab,0
+NTC,Lab,0
 Pos. Ctrl,Field,29.6
 Pos. Ctrl,Field,NA
 Pos. Ctrl,Field,NA
