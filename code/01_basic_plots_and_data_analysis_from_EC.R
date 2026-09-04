@@ -46,16 +46,16 @@ sadat <- read.csv("data/implementation_data_stannsbank.csv") %>% #
 
 sadatplot <- ggplot(sadat, aes(x = sample, y = ct_value, fill = protocol)) +
   geom_point(size = 3, shape=21, position = position_dodge(0.2), colour="black") +
-  add_phylopic(name = "Anarhichas denticulatus", x=6.7, y=35, height = 5)+
+  add_phylopic(name = "Anarhichas denticulatus", x=6.7, y=36, height = 3.8)+
   theme_bw()+ # making so you can see both y-values at same x-value
   theme(axis.title.x = element_blank(),
         axis.text.x = element_blank(),
         axis.ticks.x = element_blank(),
         #axis.text.x = element_text(angle = 45, hjust =1, size = 10),    # angling x-axis labels
-        axis.title.y = element_text(margin = margin(r = 10), size=14),  # increasing distance from y-axis label to y-axis scale
+        axis.title.y = element_text(margin = margin(r = 8), size=14),  # increasing distance from y-axis label to y-axis scale
         legend.position = "none",  # removing the colour key for multiplot
-        plot.margin = margin(10, 25, 10, 10, unit = "pt")) + # changing the margins for better multiplot
-  labs(x = NULL, y = "Ct value")  # choosing which labels to include
+        plot.margin = margin(10, 15, 10, 10, unit = "pt")) + # changing the margins for better multiplot
+  labs(x = NULL, y = "Cq", fill = "Protocol")  # choosing which labels to include
 
 sadatplot
 
@@ -65,16 +65,16 @@ hhdat <- read.csv("data/implementation_data_hharbour.csv") %>%
   
 hhdatplot <- ggplot(hhdat, aes(x = sample, y = ct_value, fill = protocol)) +
   geom_point(size = 3, position = position_dodge(0.2), shape=21, colour="black") +
-  add_phylopic(name="Fucus serratus", x=8, y=30, height=10)+
+  add_phylopic(name="Fucus serratus", x=7.7, y=30, height=10)+
   theme_bw()+
   theme(axis.title.x = element_blank(),
         axis.text.x = element_blank(),
         axis.ticks.x = element_blank(),
         #axis.text.x = element_text(angle = 45, hjust =1, size = 10),
         axis.title.y = element_text(margin = margin(r = 10)),
-        plot.margin = margin(10, 2, 10, 2, unit = "pt"), 
+        plot.margin = margin(10, 15, 10, 2, unit = "pt"), 
         legend.position = "none") +
-  labs(x = NULL, y = NULL, color = "Protocol");hhdatplot
+  labs(x = NULL, y = NULL, fill = "Protocol");hhdatplot
 
 
 # hmcs william hall (Semibalanus balanoides)
@@ -84,14 +84,14 @@ whdat <- read.csv("data/implementation_data_williamhall.csv") %>%
 
 whdatplot <- ggplot(whdat, aes(x = sample, y = ct_value, fill = protocol)) +
   geom_point(size = 3, position = position_dodge(0.2), shape = 21, colour="black") +
-  add_phylopic(name="Balanus", x=8, y=35, height = 7)+
+  add_phylopic(name="Balanus", x=7.7, y=35, height = 7.5)+
     theme_bw()+
-  theme(axis.text.x = element_text(angle = 45, hjust =1, size = 13),
+  theme(axis.text.x = element_text(angle = 45, hjust =1, size = 12),
         axis.title.x = element_text(size=14),
         axis.title.y = element_text(margin = margin(r = 10), size=14),
-        plot.margin = margin(10, 2, 10, 2, unit = "pt"), 
+        plot.margin = margin(10, 15, 10, 2, unit = "pt"), 
   legend.position = "none") +
-  labs(x = "Sample", y = NULL, color = "Protocol");whdatplot
+  labs(x = "Sample", y = NULL, fill = "Protocol");whdatplot
   
 
 # three mile lake  (Procambarus clarkii)
@@ -100,14 +100,14 @@ tmldat <- read.csv("data/implementation_data_threemile.csv") %>%
 
 tmldatplot <- ggplot(tmldat, aes(x = sample, y = ct_value, fill = protocol)) +
   geom_point(size = 3, position = position_dodge(0.2), shape=21, colour= "black") +
-  add_phylopic(name="Procambarus clarkii", x=6.8, y=38,horizontal = T, angle = 270, height = 7)+
+  add_phylopic(name="Procambarus clarkii", x=6.7, y=38,horizontal = T, angle = 270, height = 6.6)+
   theme_bw()+
-  theme(axis.text.x = element_text(angle = 45, hjust =1, size = 13),
+  theme(axis.text.x = element_text(angle = 45, hjust =1, size = 12),
         axis.title.x = element_text(size=14),
-        axis.title.y = element_text(margin = margin(r = 10), size=14),
-        plot.margin = margin(10, 25, 10, 10, unit = "pt"), 
+        axis.title.y = element_text(margin = margin(r = 8), size=14),
+        plot.margin = margin(10, 15, 10, 10, unit = "pt"), 
         legend.position = "none") +
-  labs(x = "Sample", y = "Ct value");tmldatplot
+  labs(x = "Sample", y = "Cq", fill = "Protocol");tmldatplot
 
 
 # combining all plots
@@ -126,19 +126,53 @@ tmldatplot <- ggplot(tmldat, aes(x = sample, y = ct_value, fill = protocol)) +
 #plot_grid(combplot, legplot, ncol = 2, rel_widths = c(1,0.1))
 
 
-(sadatplot + hhdatplot) / (tmldatplot + whdatplot) +
+# st catharines river - Keji (Hemigrapsus sanguineus)
+scrdat <- read.csv("data/implementation_data_st_catherines_river.csv") %>%
+  mutate(sample = fct_relevel(sample, "STD High", "STD Low", "Pos. Ctrl", "eDNA 1", "eDNA 2", "eDNA Neg", "Extr. Neg", "NTC"))
+
+scrdatplot <- ggplot(scrdat, aes(x = sample, y = ct_value, fill = protocol)) +
+  geom_point(size = 3, position = position_dodge(0.2), shape = 21, colour="black") +
+  add_phylopic(name="Hemigrapsus takanoi", x=7.7, y=32.5, height = 6.1)+
+  theme_bw()+
+  theme(axis.text.x = element_text(angle = 45, hjust =1, size = 12),
+        axis.title.x = element_text(size=14),
+        axis.title.y = element_text(margin = margin(r = 10), size=14),
+        plot.margin = margin(10, 4, 10, 2, unit = "pt"), 
+        legend.position = "none") +
+  labs(x = "Sample", y = NULL, fill = "Protocol");scrdatplot
+
+
+# little port joli - Keji (Hemigrapsus sanguineus)
+lpjdat <- read.csv("data/implementation_data_little_port_joli.csv") %>%
+  mutate(sample = fct_relevel(sample, "STD High", "STD Low", "Pos. Ctrl", "eDNA 1", "eDNA 2", "eDNA Neg", "Extr. Neg", "NTC"))
+
+lpjdatplot <- ggplot(lpjdat, aes(x = sample, y = ct_value, fill = protocol)) +
+  geom_point(size = 3, position = position_dodge(0.2), shape=21, colour="black") +
+  add_phylopic(name="Hemigrapsus takanoi", x=7.7, y=32.5, height=6.1)+
+  theme_bw()+
+  theme(axis.title.x = element_blank(),
+        axis.text.x = element_blank(),
+        axis.ticks.x = element_blank(),
+        axis.title.y = element_text(margin = margin(r = 10)),
+        plot.margin = margin(10, 4, 10, 2, unit = "pt"), 
+        legend.position = "none") +
+  labs(x = NULL, y = NULL, fill = "Protocol");lpjdatplot
+
+
+# combining plots
+(sadatplot + hhdatplot + lpjdatplot) / (tmldatplot + whdatplot + scrdatplot) +
   plot_annotation(tag_levels = "A")+
   plot_layout(guides = "collect") & #learned here that the & symbol means the theme line below applies legend to the whole grid rather than just the last plot in the grid!
   theme(legend.position = "bottom",
         legend.text = element_text(size=14),
         legend.title = element_text(size=14))
 
-ggsave(filename = "4panel_comboPlot.png", 
+ggsave(filename = "6panel_comboPlot.png", 
        plot = last_plot(), 
        device = "png", 
-       path = "./figures/", 
-       width = 10, 
-       height =8, 
+       path = "./figures/",
+       width = 14, 
+       height =10, 
        dpi = 400)
 
 ##################################################################
