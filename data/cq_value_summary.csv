@@ -27,10 +27,10 @@ test,cq_value,protocol,orig_sample_id,site,,test2,cq_value_avg,protocol2,orig_sa
 5,37.6,Laboratory,95-96,william hall,,13,0,FASTeDNA,LPJ01,keji 2
 5,37.3,Laboratory,95-96,william hall,,14,0,Laboratory,LPJ02,keji 2
 5,36.4,FASTeDNA,95-96,william hall,,14,0,FASTeDNA,LPJ02,keji 2
-5,37.9,FASTeDNA,95-96,william hall,,15,28.5,Laboratory,hull_eDNA_023B,hull_cleaning
-5,35.4,FASTeDNA,95-96,william hall,,15,29.45,FASTeDNA,hull_eDNA_023A,hull_cleaning
-6,37.1,Laboratory,97-98,william hall,,16,28.93,Laboratory,hull_eDNA_024B,hull_cleaning
-6,37.6,Laboratory,97-98,william hall,,16,29.54,FASTeDNA,hull_eDNA_024A,hull_cleaning
+5,37.9,FASTeDNA,95-96,william hall,,15,28.5,Laboratory,hull_eDNA_023,hull_cleaning
+5,35.4,FASTeDNA,95-96,william hall,,15,29.45,FASTeDNA,hull_eDNA_023,hull_cleaning
+6,37.1,Laboratory,97-98,william hall,,16,28.93,Laboratory,hull_eDNA_024,hull_cleaning
+6,37.6,Laboratory,97-98,william hall,,16,29.54,FASTeDNA,hull_eDNA_024,hull_cleaning
 6,37.4,Laboratory,97-98,william hall,,,,,,
 6,36.1,FASTeDNA,97-98,william hall,,,,,,
 6,35.7,FASTeDNA,97-98,william hall,,,,,,
