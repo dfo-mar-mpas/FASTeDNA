@@ -175,7 +175,7 @@ bsstabplotforleg <- ggplot(bsstabdat, aes(x = time, y = Ct, fill = sample)) +
   theme(axis.text.x = element_text(angle = 45, hjust =1, size = 10),
         axis.title.y = element_text(margin = margin(r = 5))) +
   scale_y_continuous(limits = c(30, 42), breaks = c(30, 34, 38, 42)) +
-  labs(x = NULL, y = "Ct", color = "Sample")
+  labs(x = NULL, y = "Cq", color = "Sample")
 
 stablegplot <- get_legend(bsstabplotforleg) 
 
@@ -190,7 +190,7 @@ bsstabplot <- ggplot(bsstabdat, aes(x = time, y = Ct, fill = sample)) +
         axis.title.y = element_text(margin = margin(r = 5)),
         text = element_text(size = 16),
         legend.position = "right") +
-  labs(x = NULL, y = "Ct", color = "Sample")
+  labs(x = NULL, y = "Cq", fill = "Sample")
 bsstabplot
 
 
@@ -210,7 +210,7 @@ cistabplot <- ggplot(cistabdat, aes(x = time, y = Ct, fill = sample)) +
         text=element_text(size=16),
         legend.position = "none") +
   scale_y_continuous(limits = c(30, 42), breaks = c(30, 34, 38, 42)) +
-  labs(x = "Time", y = "Ct", color = "Sample")
+  labs(x = "Time", y = "Cq", fill = "Sample")
 cistabplot
 
 # combining plots together
@@ -225,7 +225,7 @@ ggsave(filename = "stability_test_2panel.png",
        path = "./figures/", 
        width = 10, 
        height =8, 
-       dpi = 320)
+       dpi = 400)
 
 
 ## test statistics for Ct values between time points
@@ -284,7 +284,8 @@ dnacompareplotnozero <- ggplot(concdatnozero, aes(location, dna_conc)) +
   geom_point(aes(color=Test), size =3.5) +
   scale_color_viridis_c(option = "viridis") +
   theme_bw() + 
-  theme(legend.position = "none") +
+  theme(legend.position = "none",
+        axis.text.x = element_text(angle = 45, hjust =1, margin = margin(r = 8))) +
   annotate("text", x = 2.3, y = 120, label = "p = 0.111") +
   labs(x = "Extraction Protocol", y = expression(paste("DNA Concentration")))
 dnacompareplotnozero
@@ -337,7 +338,8 @@ cqcompareplotnozero <- ggplot(cqdatavgnozero, aes(protocol2, cq_value_avg)) +
   geom_point(aes(color=test2), size =3.5) +
   scale_color_viridis_c(option = "plasma") +
   theme_bw() + 
-  theme(legend.position = "none") +
+  theme(legend.position = "none",
+        axis.text.x = element_text(angle = 45, hjust =1, margin = margin(r = 8))) +
   annotate("text", x = 2.3, y = 40, label = "p = 0.350") +
   scale_y_continuous(limits = c(25,40), breaks = c(25,28,31,34,37,40)) +
   labs(x = "Complete Protocol", y = expression(paste("Cq")))
@@ -353,7 +355,7 @@ ggsave(filename = "paired_data_plot.png",
        device = "png", 
        path = "./figures/", 
        width = 10, 
-       height = 8, 
+       height = 7, 
        dpi = 400)
 
 
