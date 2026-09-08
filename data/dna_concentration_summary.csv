@@ -9,10 +9,10 @@ Test,dna_conc,location,orig_sample_id,,,,,,,,
 4,0,FASTeDNA,hull_eDNA_020,,,,,,,,
 5,62.6,Laboratory,hull_eDNA_022B,hull_eDNA_022B,TUBES909,DNeasy Lab Protocol - 15 min digest,62.6,hull_eDNA_022A,TUBES908,Field Extraction Protocol - 15 min digest,66.2
 5,66.2,FASTeDNA,hull_eDNA_022A,hull_eDNA_023B,TUBES909,DNeasy Lab Protocol - 15 min digest,56,hull_eDNA_023A,TUBES909,Field Extraction Protocol - 15 min digest,55.4
-6,55.4,Laboratory,hull_eDNA_023B,hull_eDNA_024B,TUBES909,DNeasy Lab Protocol - 15 min digest,48.6,hull_eDNA_024A,TUBES910,Field Extraction Protocol - 15 min digest,63.2
-6,63.2,FASTeDNA,hull_eDNA_023A,909-ENEG-1,TUBES909,DNeasy Lab Protocol - 15 min digest,0,908-ENEG-1,TUBES911,Field Extraction Protocol - 15 min digest,0
+6,56,Laboratory,hull_eDNA_023B,hull_eDNA_024B,TUBES909,DNeasy Lab Protocol - 15 min digest,48.6,hull_eDNA_024A,TUBES910,Field Extraction Protocol - 15 min digest,63.2
+6,55.4,FASTeDNA,hull_eDNA_023A,909-ENEG-1,TUBES909,DNeasy Lab Protocol - 15 min digest,0,908-ENEG-1,TUBES911,Field Extraction Protocol - 15 min digest,0
 7,48.6,Laboratory,hull_eDNA_024B,,,,,,,,
-7,,FASTeDNA,hull_eDNA_024A,,,,,,,,
+7,63.2,FASTeDNA,hull_eDNA_024A,,,,,,,,
 8,0,Laboratory,909-ENEG-1,,,,,,,,
 8,0,FASTeDNA,908-ENEG-1,,,,,,,,
 9,97.8,Laboratory,RA_B,Field test 11-oct-24,RA_A,Field,110,,,,
