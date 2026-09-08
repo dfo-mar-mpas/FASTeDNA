@@ -110,22 +110,6 @@ tmldatplot <- ggplot(tmldat, aes(x = sample, y = ct_value, fill = protocol)) +
   labs(x = "Sample", y = "Cq", fill = "Protocol");tmldatplot
 
 
-# combining all plots
-#combplot <- plot_grid(sadatplot, hhdatplot, tmldatplot, whdatplot, ncol = 2, nrow = 2, labels = "AUTO", align = "hv")
-
-#extracting a legend for sharing between plots
-# hhdatplotleg <- ggplot(hhdat, aes(x = sample, y = ct_value, fill = protocol)) +
-#   geom_point(size = 3, position = position_dodge(0.2), shape=21, colour="black") +
-#   theme(axis.text.x = element_text(angle = 45, hjust =1, size = 8),
-#         axis.title.y = element_text(margin = margin(r = 10))) +
-#   labs(x = NULL, y = NULL, fill = "Protocol")
-# 
-# legplot <- get_legend(hhdatplotleg)  #
-
-# plotting all together with shared legend
-#plot_grid(combplot, legplot, ncol = 2, rel_widths = c(1,0.1))
-
-
 # st catharines river - Keji (Hemigrapsus sanguineus)
 scrdat <- read.csv("data/implementation_data_st_catherines_river.csv") %>%
   mutate(sample = fct_relevel(sample, "STD High", "STD Low", "Pos. Ctrl", "eDNA 1", "eDNA 2", "eDNA Neg", "Extr. Neg", "NTC"))
@@ -265,19 +249,45 @@ print(cikruskal_test)  # no significant difference, which is expected
 
 # bringing in dataset
 concdat <- read.csv("data/dna_concentration_summary.csv")
-concdat <- concdat[1:48, 1:3]
+concdat <- concdat[1:72, 1:3]
+
+# testing data for normality
+sw_test <- shapiro.test(concdat$dna_conc)
+print(sw_test)  # data is not normal according to Shapiro-Wilk
+
+# Trying Wilcocoxon sign (for paired continuous data, independent observations, not normally distributed)
+# preparing the data for test
+dnatestdat <- pivot_wider(concdat, names_from = location, values_from = dna_conc)
+# removing zero values required by test
+dnatestdatw <- dnatestdat %>% filter(Laboratory !=0) 
+# applying test
+w_test <- wilcox.test(dnatestdatw$Laboratory, dnatestdatw$FASTeDNA, paired = TRUE)
+print(w_test)  # no statistically significant difference in DNA concentration between lab and field protocol
 
 # plotting values with linkage
 dnacompareplot <- ggplot(concdat, aes(location, dna_conc)) +
-                  geom_line(aes(group=Test), color="gray20", size=0.5, alpha=0.5) +
-                  geom_point(aes(fill=Test),shape=21, colour="black", size=4) +
-                  scale_fill_viridis_b(option = "viridis") +
-                  scale_x_discrete(expand = expansion(mult=c(0.1,0.1)))+
-                  theme_bw()+
-                  theme(legend.position = "none",
-                        text=element_text(size=16)) +
-                  labs(x = "Extraction Protocol", y = "DNA Concentration (ng/ul)")
+  geom_line(aes(group=Test), color="gray20", linewidth =0.5, alpha=0.5) +
+  geom_point(aes(color=Test), size =3.5) +
+  scale_color_viridis_c(option = "viridis") +
+  theme_bw() + 
+  theme(legend.position = "none") +
+  annotate("text", x = 2.3, y = 120, label = "p = 0.111") +
+  labs(x = "Extraction Protocol", y = expression(paste("DNA Concentration")))
 dnacompareplot
+
+# plotting again but with zeros removed
+# first removing zeros
+concdatnozero <- concdat %>% filter(dna_conc !=0)
+
+dnacompareplotnozero <- ggplot(concdatnozero, aes(location, dna_conc)) +
+  geom_line(aes(group=Test), color="gray20", linewidth =0.5, alpha=0.5) +
+  geom_point(aes(color=Test), size =3.5) +
+  scale_color_viridis_c(option = "viridis") +
+  theme_bw() + 
+  theme(legend.position = "none") +
+  annotate("text", x = 2.3, y = 120, label = "p = 0.111") +
+  labs(x = "Extraction Protocol", y = expression(paste("DNA Concentration")))
+dnacompareplotnozero
 
 ggsave(filename = "dna_concentration_plot.png", 
        plot = dnacompareplot, 
@@ -287,24 +297,64 @@ ggsave(filename = "dna_concentration_plot.png",
        height =8, 
        dpi = 300)
 
+
+### doing the same Wilcoxon test and visualization for paired eDNA samples Cq values across all equal tests ###
+# bringing in the Cq data 
+cqdat <- read.csv("data/cq_value_summary.csv")
+
+# data with triplicate Cq values from samples
+cqdat1 <- cqdat[, 1:5]
+# data with replicate Cq values averaged per sample
+cqdatavg <- cqdat[1:32,7:11]
+
 # testing data for normality
-sw_test <- shapiro.test(concdat$dna_conc)
-print(sw_test)
+sw_test <- shapiro.test(cqdatavg$cq_value)
+print(sw_test)  # data is not normal according to Shapiro-Wilk
 
-# Trying paired t-test (for paired continuous data, independent observations, normally distributed)
-# preparing the data for tests
-dnatestdat <- pivot_wider(concdat, names_from = location, values_from = dna_conc)
+# Applying Wilcocoxon sign-ranked test to averaged Cq value dataset
+cqtestdat <- pivot_wider(cqdatavg, names_from = protocol2, values_from = cq_value_avg) # altering dataframe for test
+cqtestdat <- cqtestdat %>% filter(Laboratory !=0) # removing zeros as required by WSR test
 
-t_test <- t.test(dnatestdat$lab, dnatestdat$field, paired = TRUE)
-print(t_test)
-                    
-# Trying Wilcoxon sign (for paired continuous data, independent observations, not normally distributed)
-# have to remove zero values
-dnatestdatw <- dnatestdat %>% filter(lab !=0) 
+cq_w_test <- wilcox.test(cqtestdat$Laboratory, cqtestdat$FASTeDNA, paired = TRUE)
+print(cq_w_test)  # no statistically significant difference in DNA concentration between lab and field protocol
 
-w_test <- wilcox.test(dnatestdatw$lab, dnatestdatw$field, paired = TRUE)
-print(w_test)
+# plotting values with linkage
+cqcompareplot <- ggplot(cqdat, aes(protocol, cq_value)) +
+  geom_line(aes(group=test), color="gray20", linewidth =0.5, alpha=0.5) +
+  geom_point(aes(color=test), size =3.5, position = position_dodge(0.1)) +
+  scale_color_viridis_c(option = "plasma") +
+  theme_bw() + 
+  theme(legend.position = "none") +
+  annotate("text", x = 2.3, y = 45, label = "p = 0.174") +
+  labs(x = "Extraction Protocol", y = expression(paste("Cq")))
+cqcompareplot
 
+# trying again but with zeros removed and average Cqs per test
+cqdatavgnozero <- cqdatavg %>% filter(cq_value_avg !=0)
+
+cqcompareplotnozero <- ggplot(cqdatavgnozero, aes(protocol2, cq_value_avg)) +
+  geom_line(aes(group=test2), color="gray20", linewidth =0.5, alpha=0.5) +
+  geom_point(aes(color=test2), size =3.5) +
+  scale_color_viridis_c(option = "plasma") +
+  theme_bw() + 
+  theme(legend.position = "none") +
+  annotate("text", x = 2.3, y = 40, label = "p = 0.350") +
+  scale_y_continuous(limits = c(25,40), breaks = c(25,28,31,34,37,40)) +
+  labs(x = "Complete Protocol", y = expression(paste("Cq")))
+cqcompareplotnozero   # this looks better although many fewer data points
+
+
+# combining DNA concentation and Cq paired-data plots
+dnacompareplotnozero + cqcompareplotnozero + 
+  plot_annotation(tag_levels = "A")
+# exporting
+ggsave(filename = "paired_data_plot.png", 
+       plot = last_plot(), 
+       device = "png", 
+       path = "./figures/", 
+       width = 10, 
+       height = 8, 
+       dpi = 400)
 
 
 # Field trial data --------------------------------------------------------
