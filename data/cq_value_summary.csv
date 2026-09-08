@@ -7,7 +7,7 @@ test,cq_value,protocol,orig_sample_id,site,,test2,cq_value_avg,protocol2,orig_sa
 1,37.6,FASTeDNA,PER25-31,st anns bank,,3,29.4,FASTeDNA,1,halifax harbour
 2,0,Laboratory,Dive25-1,st anns bank,,4,29.6,Laboratory,2,halifax harbour
 2,0,Laboratory,Dive25-1,st anns bank,,4,30.1,FASTeDNA,2,halifax harbour
-2,0,Laboratory,Dive25-1,st anns bank,,5,37.0,Laboratory,95-96,william hall
+2,0,Laboratory,Dive25-1,st anns bank,,5,37,Laboratory,95-96,william hall
 2,0,FASTeDNA,Dive25-1,st anns bank,,5,36.6,FASTeDNA,95-96,william hall
 2,0,FASTeDNA,Dive25-1,st anns bank,,6,37.4,Laboratory,97-98,william hall
 2,0,FASTeDNA,Dive25-1,st anns bank,,6,35.8,FASTeDNA,97-98,william hall
@@ -15,9 +15,9 @@ test,cq_value,protocol,orig_sample_id,site,,test2,cq_value_avg,protocol2,orig_sa
 3,29.8,Laboratory,1,halifax harbour,,7,38.2,FASTeDNA,RSC1,three mile
 3,29.7,Laboratory,1,halifax harbour,,8,32.1,Laboratory,RSC2,three mile
 3,30.7,FASTeDNA,1,halifax harbour,,8,32.9,FASTeDNA,RSC2,three mile
-3,29.0,FASTeDNA,1,halifax harbour,,9,28.1,Laboratory,RA,bio dock
+3,29,FASTeDNA,1,halifax harbour,,9,28.1,Laboratory,RA,bio dock
 3,28.6,FASTeDNA,1,halifax harbour,,9,28.9,FASTeDNA,RA,bio dock
-4,29.5,Laboratory,2,halifax harbour,,10,29.0,Laboratory,RB,bio dock
+4,29.5,Laboratory,2,halifax harbour,,10,29,Laboratory,RB,bio dock
 4,29.7,Laboratory,2,halifax harbour,,10,29.6,FASTeDNA,RB,bio dock
 4,29.6,Laboratory,2,halifax harbour,,11,0,Laboratory,CAT01,keji 1
 4,30.3,FASTeDNA,2,halifax harbour,,11,0,FASTeDNA,CAT01,keji 1
@@ -27,10 +27,10 @@ test,cq_value,protocol,orig_sample_id,site,,test2,cq_value_avg,protocol2,orig_sa
 5,37.6,Laboratory,95-96,william hall,,13,0,FASTeDNA,LPJ01,keji 2
 5,37.3,Laboratory,95-96,william hall,,14,0,Laboratory,LPJ02,keji 2
 5,36.4,FASTeDNA,95-96,william hall,,14,0,FASTeDNA,LPJ02,keji 2
-5,37.9,FASTeDNA,95-96,william hall,,,,,,
-5,35.4,FASTeDNA,95-96,william hall,,,,,,
-6,37.1,Laboratory,97-98,william hall,,,,,,
-6,37.6,Laboratory,97-98,william hall,,,,,,
+5,37.9,FASTeDNA,95-96,william hall,,15,28.5,Laboratory,hull_eDNA_023B,hull_cleaning
+5,35.4,FASTeDNA,95-96,william hall,,15,29.45,FASTeDNA,hull_eDNA_023A,hull_cleaning
+6,37.1,Laboratory,97-98,william hall,,16,28.93,Laboratory,hull_eDNA_024B,hull_cleaning
+6,37.6,Laboratory,97-98,william hall,,16,29.54,FASTeDNA,hull_eDNA_024A,hull_cleaning
 6,37.4,Laboratory,97-98,william hall,,,,,,
 6,36.1,FASTeDNA,97-98,william hall,,,,,,
 6,35.7,FASTeDNA,97-98,william hall,,,,,,
@@ -43,7 +43,7 @@ test,cq_value,protocol,orig_sample_id,site,,test2,cq_value_avg,protocol2,orig_sa
 7,38.7,FASTeDNA,RSC1,three mile,,,,,,
 8,32.2,Laboratory,RSC2,three mile,,,,,,
 8,32.2,Laboratory,RSC2,three mile,,,,,,
-8,32.0,Laboratory,RSC2,three mile,,,,,,
+8,32,Laboratory,RSC2,three mile,,,,,,
 8,32.8,FASTeDNA,RSC2,three mile,,,,,,
 8,33,FASTeDNA,RSC2,three mile,,,,,,
 8,32.8,FASTeDNA,RSC2,three mile,,,,,,
@@ -83,3 +83,15 @@ test,cq_value,protocol,orig_sample_id,site,,test2,cq_value_avg,protocol2,orig_sa
 14,0,FASTeDNA,LPJ02,keji 2,,,,,,
 14,0,FASTeDNA,LPJ02,keji 2,,,,,,
 14,0,FASTeDNA,LPJ02,keji 2,,,,,,
+15,28.46,Laboratory,hull_eDNA_023B,hull_cleaning,,,,,,
+15,28.45,Laboratory,hull_eDNA_023B,hull_cleaning,,,,,,
+15,28.52,Laboratory,hull_eDNA_023B,hull_cleaning,,,,,,
+15,29.49,FASTeDNA,hull_eDNA_023A,hull_cleaning,,,,,,
+15,29.55,FASTeDNA,hull_eDNA_023A,hull_cleaning,,,,,,
+15,29.31,FASTeDNA,hull_eDNA_023A,hull_cleaning,,,,,,
+16,28.94,Laboratory,hull_eDNA_024B,hull_cleaning,,,,,,
+16,28.91,Laboratory,hull_eDNA_024B,hull_cleaning,,,,,,
+16,28.94,Laboratory,hull_eDNA_024B,hull_cleaning,,,,,,
+16,29.64,FASTeDNA,hull_eDNA_024A,hull_cleaning,,,,,,
+16,29.33,FASTeDNA,hull_eDNA_024A,hull_cleaning,,,,,,
+16,29.65,FASTeDNA,hull_eDNA_024A,hull_cleaning,,,,,,
