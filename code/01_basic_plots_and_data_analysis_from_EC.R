@@ -47,10 +47,10 @@ digestdat <- digestdat %>%
                            str_detect(assay_rep, "Ci") ~ "C intestinalis",
                            str_detect(assay_rep, "Bv") ~ "B violaceus")) # adding an assay column
 digestdatfilt <- digestdat %>% filter(replicate %in% c("A", "B", "C")) # removing negative controls
-
+# setting sample order for plotting
 datorder <- c("O/N_1",	"O/N_2",	"O/N_3",	"2h_1",	"2h_2",	"1h_1",	"1h_2",	"30m_1", "30m_2",	"15m_1", "15m_2", "15m_3")
 digestdatfilt$sample_time <- factor(digestdatfilt$sample_time, levels = datorder)
-
+# plotting both Cq values and DNA concentration per sample in one
 ggplot(digestdatfilt, aes(x = sample_time, y = Ct, color = assay)) +
   geom_point(aes(y = DNA.Concentration, shape = "DNA Concentration"), size = 3, color = "black") +
   scale_y_continuous(name = "Cq", sec.axis = sec_axis(~ . * 1, name = expression(paste("DNA Concentration")))) +
