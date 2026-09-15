@@ -36,6 +36,43 @@ ggplot(trialdat, aes(x = sample)) +
   
 # maybe this is a useful way to represent data... maybe not!
 
+
+## doing the same kind of visualization but with early protocol optimization data
+# bringing in the data for digest time testing
+digestdat <- read.csv("data/digest_time_test.csv")
+digestdat[, 9:33] <- sapply(digestdat[, 9:33], as.numeric)  # converting ct data to numeric
+digestdat <- pivot_longer(digestdat, cols = c(Bs_CT_1, Bs_CT_2, Bs_CT_3, Ci_CT_1, Ci_CT_2, Ci_CT_3, Bv_CT_1, Bv_CT_2, Bv_CT_3), names_to = "assay_rep", values_to = "Ct") # prepping data for plotting
+digestdat <- digestdat %>% 
+  mutate(assay = case_when(str_detect(assay_rep, "Bs") ~ "B schlosseri",
+                           str_detect(assay_rep, "Ci") ~ "C intestinalis",
+                           str_detect(assay_rep, "Bv") ~ "B violaceus")) # adding an assay column
+digestdatfilt <- digestdat %>% filter(replicate %in% c("A", "B", "C")) # removing negative controls
+
+datorder <- c("O/N_1",	"O/N_2",	"O/N_3",	"2h_1",	"2h_2",	"1h_1",	"1h_2",	"30m_1", "30m_2",	"15m_1", "15m_2", "15m_3")
+digestdatfilt$sample_time <- factor(digestdatfilt$sample_time, levels = datorder)
+
+ggplot(digestdatfilt, aes(x = sample_time, y = Ct, color = assay)) +
+  geom_point(aes(y = DNA.Concentration, shape = "DNA Concentration"), size = 3, color = "black") +
+  scale_y_continuous(name = "Cq", sec.axis = sec_axis(~ . * 1, name = expression(paste("DNA Concentration")))) +
+  scale_shape_manual(values = c("DNA Concentration" = 17), name = "") +
+  geom_point(size = 3.5, position = position_dodge(0.5)) +
+  labs(x = "Sample", color = "Assay") +
+  theme_bw() +
+  theme(
+    axis.text.x = element_text(angle = 45, hjust = 1, size = 8),
+    axis.title.y = element_text(margin = margin(r = 10)),
+    legend.position = "bottom"
+  )
+
+ggsave(filename = "dna_digest_test.png", 
+       plot = last_plot(), 
+       device = "png", 
+       path = "./figures/",
+       width = 12, 
+       height =8, 
+       dpi = 400)
+
+
 #######################################
 ## implementation data visualization ##
 #######################################
