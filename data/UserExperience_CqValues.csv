@@ -1,0 +1,23 @@
+User Experience,Sample ID,Type,Field_Cq value Replicate 1,Field_Cq value Replicate 2,Field_Cq value Replicate 3,Field_Cq Mean,Lab_Cq value Replicate 1,Lab_Cq value Replicate 2,Lab_Cq value Replicate 3,Lab_Cq Mean
+No Lab Experience,AIS-4480,Sample,27.7,27.5,27.9,27.7,27.7,27.6,27.6,27.6
+,AIS-4481,Sample,28.5,25.8,27,27.1,27.3,27.4,27.3,27.4
+,AIS-4483,Field Blank,NA,NA,NA,NA,NA,NA,NA,NA
+,AIS-4492,Sample,27.9,27.9,27.6,27.8,26.8,26.8,26.8,26.8
+,AIS-4493,Sample,28.1,28.5,NA,28.3,27.1,27.1,27.1,27.1
+,AIS-4494,Sample,28.2,28.2,28.1,28.2,27.1,27.1,27,27.1
+,AIS-4495,Field Blank,27.4,27.4,27.4,27.4,NA,NA,NA,NA
+Non-Molecular Lab Experience,AIS-4476,Sample,28.9,29,29,29,27.5,27.5,27.4,27.4
+,AIS-4477,Sample,29,29,28.8,28.9,28,28.1,28,28
+,AIS-4479,Field Blank,NA,NA,NA,NA,NA,38.4,38.4,38.4
+,AIS-4484,Sample,26.9,26.6,26.3,26.6,27.3,27.4,27.3,27.3
+,AIS-4485,Sample,27.2,26.4,27.3,27,27.3,27.4,27.4,27.3
+,AIS-4487,Field Blank,NA,NA,NA,NA,NA,NA,NA,NA
+Previous Molecular Lab Experience,AIS-4488,Sample,27.7,27.5,27.6,27.6,27.3,27.2,27.3,27.3
+,AIS-4489,Sample,26.7,27,27.2,27,27,27.1,27,27
+,AIS-4491,Field Blank,NA,NA,NA,NA,NA,NA,NA,NA
+Molecular Lab Experts,AIS-4472,Sample,27.5,27.4,27.6,27.5,27,26.9,27,27
+,AIS-4473,Sample,26.6,26.3,26.6,26.5,25,24.8,24.9,24.9
+,AIS-4475,Field Blank,NA,NA,42.99,43,39.3,NA,39.9,39.6
+,AIS-4500,Sample,27.4,27.7,27.5,27.5,26.7,26.6,26.6,26.6
+,AIS-4501,Sample,27.9,27.7,27.8,27.8,27.1,27,27,26.6
+,AIS-4503,Field Blank,NA,NA,NA,NA,NA,NA,NA,NA
