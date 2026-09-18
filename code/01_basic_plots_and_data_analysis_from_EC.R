@@ -11,9 +11,9 @@ library(forcats)
 library(patchwork)
 library(rphylopic)
 
-##########################
-### field trial - Evan ###
-#########################
+#############################################
+### Methods developing and testing - Evan ###
+#############################################
 
 # bring in curated data
 trialdat <- read.csv("data/field_trial_data.csv")
