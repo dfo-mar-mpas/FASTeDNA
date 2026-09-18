@@ -1,0 +1,13 @@
+Sample ID,Type,Replicate,Sample Location,Filter,Filter Preservation,Volume Filtered (L),ABL Sample ID,ExtraCqion Protocol,DNA Concentration,Cq_1,Cq_2,Cq_3,Cq_4,Cq_5,Cq_6,Cq_Mean,Cq_SD,"IPC result, inhibition?"
+B01_C,Field Blank - A,A,Steep Rock,0.5 GF filter,dessicant in coin envelope,1L,B01_C_3h,DNeasyLab Protocol - 3 hr digest,0,NOAMP,NOAMP,NOAMP,NOAMP,NOAMP,NOAMP,,,N
+B06,Sample - A,A,Steep Rock,0.5 GF filter,dessicant in coin envelope,1L,B06_3h,DNeasyLab Protocol - 3 hr digest,10,36.74,36.04,35.97,NOAMP,35.38,36.64,36.15,,N
+B11,Sample - A,A,Steep Rock,0.5 GF filter,dessicant in coin envelope,1L,B11_3h,DNeasyLab Protocol - 3 hr digest,9.87,35.89,NOAMP,35.77,NOAMP,36.35,35.75,35.94,,N
+B16,Sample - A,A,Steep Rock,0.5 GF filter,dessicant in coin envelope,1L,B16_3h,DNeasyLab Protocol - 3 hr digest,8.67,37.71,NOAMP,37.79,NOAMP,36.12,36.74,37.09,,N
+B21,Sample - A,A,Steep Rock,0.5 GF filter,dessicant in coin envelope,1L,B21_3h,DNeasyLab Protocol - 3 hr digest,7,34.71,34.29,34.54,33.95,34.28,35.08,34.48,,N
+B30,Sample - A,A,Steep Rock,0.5 GF filter,dessicant in coin envelope,1L,B30_3h,DNeasyLab Protocol - 3 hr digest,6.11,34.75,37.76,36.11,35.24,37.69,36.83,36.4,,N
+B01_C,Field Blank - B,B,Steep Rock,0.5 GF filter,dessicant in coin envelope,1L,B01_C_1h,DNeasyLab Protocol - 1 hr digest,0,,,,,,,,,N
+B06,Sample - B,B,Steep Rock,0.5 GF filter,dessicant in coin envelope,1L,B06_1h,DNeasyLab Protocol - 1 hr digest,7.73,NOAMP,36.8,37.94,37.56,36.46,37.94,37.34,0.68,N
+B11,Sample - B,B,Steep Rock,0.5 GF filter,dessicant in coin envelope,1L,B11_30m,DNeasyLab Protocol - 30 min digest,8.47,NOAMP,36.63,NOAMP,NOAMP,37.41,37.04,37.03,0.39,N
+B16,Sample - B,B,Steep Rock,0.5 GF filter,dessicant in coin envelope,1L,B16_30m,DNeasyLab Protocol - 30 min digest,10.7,36.05,36.99,36.14,35.84,36.65,37.04,36.45,0.51,N
+B21,Sample - B,B,Steep Rock,0.5 GF filter,dessicant in coin envelope,1L,B21_15m,DNeasyLab Protocol - 15 min digest,9.73,35.32,34.87,37.91,35.93,35.54,35.19,35.79,1.1,N
+B30,Sample - B,B,Steep Rock,0.5 GF filter,dessicant in coin envelope,1L,B30_15m,DNeasyLab Protocol - 15 min digest,8.4,36.26,36.43,36.59,35.47,37,37.02,36.46,1.2,N

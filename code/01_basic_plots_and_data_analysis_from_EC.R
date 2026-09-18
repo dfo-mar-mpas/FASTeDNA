@@ -53,7 +53,7 @@ digestdatfilt$sample_time <- factor(digestdatfilt$sample_time, levels = datorder
 # plotting both Cq values and DNA concentration per sample in one
 ggplot(digestdatfilt, aes(x = sample_time, y = Ct, color = assay)) +
   geom_point(aes(y = DNA.Concentration, shape = "DNA Concentration"), size = 3, color = "black") +
-  scale_y_continuous(name = "Cq", sec.axis = sec_axis(~ . * 1, name = expression(paste("DNA Concentration")))) +
+  scale_y_continuous(name = "Cq", sec.axis = sec_axis(~ ., name = expression(paste("DNA Concentration")))) +
   scale_shape_manual(values = c("DNA Concentration" = 17), name = "") +
   geom_point(size = 3.5, position = position_dodge(0.5)) +
   labs(x = "Sample", color = "Assay") +
@@ -71,6 +71,45 @@ ggsave(filename = "dna_digest_test.png",
        width = 12, 
        height =8, 
        dpi = 400)
+
+
+## steep rock eDNA sample digest time test ##
+# bringing in the data
+steeprdat <- read.csv("data/steep_rock_extraction_digest_test.csv")
+steeprdat[, 11:16] <- sapply(steeprdat[, 11:16], as.numeric)  # converting ct data to numeric
+# calculating mean and std for each sample
+steeprdat <- steeprdat %>%
+  rowwise() %>%
+  mutate(Mean = mean(c(Cq_1,Cq_2,Cq_3,Cq_4,Cq_5,Cq_6), na.rm = TRUE)) %>%
+  mutate(stddev = sd(c(Cq_1,Cq_2,Cq_3,Cq_4,Cq_5,Cq_6), na.rm = TRUE)) %>%
+  ungroup()
+# reformat for plotting
+steeprdat <- pivot_longer(steeprdat, cols = c(Cq_1,Cq_2,Cq_3,Cq_4,Cq_5,Cq_6), names_to = "Cq_rep", values_to = "Cq") # prepping data for plotting
+
+# setting sample order for plotting
+steeprorder <- c("B01_C_3h",	"B01_C_1h",	"B06_3h",	"B06_1h", "B11_3h",	"B11_30m", "B16_3h", "B16_30m",	"B21_3h",	"B21_15m","B30_3h","B30_15m")
+steeprdat$ABL.Sample.ID <- factor(steeprdat$ABL.Sample.ID, levels = steeprorder)
+# plotting both Cq values and DNA concentration per sample in one
+ggplot(steeprdat, aes(x = ABL.Sample.ID, y = Cq, color = Sample.ID)) +
+  geom_point(size = 3.5) +
+  geom_point(data = steeprdat, aes(x = ABL.Sample.ID, y = Mean),
+             color = "red3", size = 2) + 
+  scale_y_continuous(name = "Cq", limits = c(0,42), sec.axis = sec_axis(~ . /2, name = expression(paste("DNA Concentration")))) +
+  scale_shape_manual(values = c("DNA Concentration" = 17), name = "") +
+  geom_point(aes(y = DNA.Concentration*2, shape = "DNA Concentration"), size = 3, color = "black") +
+  geom_errorbar(data = steeprdat, aes(x = ABL.Sample.ID, ymin = Mean - stddev, ymax = Mean + stddev), width = 0.1, color = "red3") +   
+  labs(x = "Sample_DigestTime", color = "Sample") +
+  theme_bw() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 8), axis.title.y = element_text(margin = margin(r = 10)), plot.margin = margin(5, 10, 5, 5, unit = "pt"), legend.position = "bottom") 
+  
+ggsave(filename = "dna_steepr_test.png", 
+       plot = last_plot(), 
+       device = "png", 
+       path = "./figures/",
+       width = 9, 
+       height = 7, 
+       dpi = 400)
+
 
 
 #######################################
