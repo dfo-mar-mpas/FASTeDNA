@@ -11,5 +11,17 @@ Environmental DNA (eDNA) has emerged as a powerful tool for monitoring and surve
 #See the system in action on the [FASTeDNA youtube channel](https://www.youtube.com/@FASTeDNA) 
 
 ----
-<img src="inst/Flow diagram of FASTeDNA process.jpg" align="right" height="1000" />
-<em>Figure 2. Flow diagram of the FASTeDNA workflow and the corresponding laboratory verification process. FASTeDNA was designed to produce results comparable to conventional laboratory analyses while reducing turnaround time. Following sample collection, each sample is divided into two portions: one is processed in the field using the FASTeDNA workflow, and the other is processed using standard laboratory methods to verify field generated results.
+
+<img src="figures/Figure 1.png" align="left" height="500" />
+
+<em><strong>Figure 1. </strong> Images of two configurations of the FASTeDNA Laboratory, illustrating their packed and unpacked footprint. Each configuration depends on the mode of transportation to the location. The first (a, packed; b, unpacked) is designed for air travel, while the second (c, packed; d, unpacked) is intended for other transport methods (e.g., vehicle or boat).</em>
+
+<br clear="left"/>
+
+<br><br>
+
+<img src="inst/Flow diagram of FASTeDNA process.jpg" align="left" height="1000" />
+
+<em><strong>Figure 2. </strong>Flow diagram of the FASTeDNA workflow and the corresponding laboratory verification process. FASTeDNA was designed to produce results comparable to conventional laboratory analyses while reducing turnaround time. Following sample collection, each sample is divided into two portions: one is processed in the field using the FASTeDNA workflow, and the other is processed using standard laboratory methods to verify field generated results.</em>
+
+<br clear="left"/>
