@@ -25,3 +25,11 @@ Environmental DNA (eDNA) has emerged as a powerful tool for monitoring and surve
 <em><strong>Figure 2. </strong>Flow diagram of the FASTeDNA workflow and the corresponding laboratory verification process. FASTeDNA was designed to produce results comparable to conventional laboratory analyses while reducing turnaround time. Following sample collection, each sample is divided into two portions: one is processed in the field using the FASTeDNA workflow, and the other is processed using standard laboratory methods to verify field generated results.</em>
 
 <br clear="left"/>
+
+<br><br>
+
+<img src="figures/Figure 4.png" align="left" height="500" />
+
+<em><strong>Figure 3. </strong> Images of the different FASTeDNA field kits and associated consumables used for field-based eDNA sample processing: (a) filter-cutting kit for halving an eDNA filter prior to extraction; (b) field DNA extraction kit and required pre-aliquoted reagents and consumables; (c) field extraction negative control (ENEG) kit and required pre-aliquoted reagents and consumables; and (d) qPCR assay kit and consumables used to analyze extracted DNA for a targeted species.</em>
+
+<br clear="left"/>
