@@ -67,4 +67,19 @@ ggsave(filename = "UserExperience_Cq_comparison.pdf",
 
 
 
+# Make again with mean in a different colour and no error bars
 
+ggplot(data=cq.long.fix[-c(33,43:45,71:72,149),], 
+       aes(x=fct_inorder(Sample), y=value, fill=Field_Lab, shape=factor(Type)))+
+  geom_point()+
+  stat_summary(fun = mean, geom = "point", size = 2, fill="green") +
+  #stat_summary(fun.data = mean_se, geom = "errorbar", width = 0.2) +
+  scale_shape_manual(values=c(23,22, 21))+
+  scale_fill_manual(values = c("gray","black"))+
+  labs(fill="", shape="")+
+  ylab(label = "Cq")+
+  xlab(label="Sample")+
+  guides(fill = guide_legend(override.aes = list(shape = 21, size = 4)))+
+  theme_bw()+
+  theme(axis.text.x = element_text(angle = 45,hjust = 1, vjust = 1),
+        text = element_text(size=15))
