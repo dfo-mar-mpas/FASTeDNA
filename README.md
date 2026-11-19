@@ -10,13 +10,40 @@ Environmental DNA (eDNA) has emerged as a powerful tool for monitoring and surve
 
 #See the system in action on the [FASTeDNA youtube channel](https://www.youtube.com/@FASTeDNA) 
 
-<img src="inst/FASTeDNA logo.jpg" align="left" height="250" />
+----
 
----
-### FASTeDNA : un flux de travail adaptable et déployable sur le terrain pour la détection rapide et la surveillance aquatique en temps réel
+<img src="figures/Figure 1.png" align="left" height="500" />
 
-#### Meghan C. McBride, Evan Cronmiller, Robert Bajno, Genevieve J. Parent, Nellie Gagne, Francis LeBlanc, Nicholas W. Jeffery, Kira Krumhansl, Sarah Kingsbury, Ryan R.E. Stanley, Anais Lacoursiere-Roussel, Anne-Laure Ferchaud, Claudio DiBacco 
+<em><strong>Figure 1. </strong> Images of two configurations of the FASTeDNA Laboratory, illustrating their packed and unpacked footprint. Each configuration depends on the mode of transportation to the location. The first (a, packed; b, unpacked) is designed for air travel, while the second (c, packed; d, unpacked) is intended for other transport methods (e.g., vehicle or boat).</em>
 
-**Résumé**
+<br clear="left"/>
 
-L’ADN environnemental (ADNe) est devenu un outil puissant pour le suivi et la surveillance des espèces aquatiques envahissantes (EAE). Cependant, les flux de travail conventionnels reposent sur un traitement centralisé en laboratoire, ce qui peut entraîner des retards dans l’obtention des résultats, ce qui limite leur efficacité lorsque des décisions urgentes sont nécessaires. Nous présentons ici FASTeDNA, un flux de travail d’ADNe ciblé basé sur la qPCR déployable sur le terrain pour la détection rapide (4 à 5 heures) des espèces aquatiques marines et d’eau douce. Ce flux de travail prend en charge les applications au point de besoin visant à identifier et à réduire le risque d’introduction, y compris les inspections d’embarcations aux points d’entrée, les évaluations de l’encrassement biologique des navires, l’application de la réglementation et la surveillance à distance. Nous avons élaboré et testé le protocole, consistant en l’extraction d’ADN et la PCR en temps réel, avec des échantillons de terrain ciblant les EAE marines (Ciona intestinalis, Botryllus schlosseri, Botrylloides violaceus) et d’eau douce (Dreissena polymorpha) à haut risque dans une gamme d’abondances, donnant des résultats précis, fiables et reproductibles comparables à ceux obtenus par des analyses en laboratoire. Le protocole a ensuite été évalué par des personnes possédant une expérience variée en laboratoire moléculaire, qui ont toutes produit des résultats précis et fourni des commentaires pour améliorer la convivialité générale. D’autres essais sur le terrain menés par des utilisateurs finaux qui n’ont pas participé à l’élaboration ont confirmé l’exactitude et l’applicabilité plus large du flux de travail de FASTeDNA dans les programmes existants de surveillance des EAE, des espèces en péril et des aires de conservation pour toutes les espèces (Procambaus clarkii, Sargassum muticum, Hemigrapsus sanguineus, Anarhichas lupus). Collectivement, ces résultats démontrent que FASTeDNA fournit un outil rapide, fiable et accessible pour la surveillance aquatique en temps réel. En complétant l’infrastructure de laboratoire existante tout en augmentant la capacité de surveillance et l’accessibilité, FASTeDNA permet une prise de décision plus rapide en matière de biosécurité, de conservation et de gestion environnementale dans les écosystèmes marins et d’eau douce.
+<br><br>
+
+<img src="inst/Flow diagram of FASTeDNA process.jpg" align="left" height="800" />
+
+<em><strong>Figure 2. </strong>Flow diagram of the FASTeDNA workflow and the corresponding laboratory verification process. FASTeDNA was designed to produce results comparable to conventional laboratory analyses while reducing turnaround time. Following sample collection, each sample is divided into two portions: one is processed in the field using the FASTeDNA workflow, and the other is processed using standard laboratory methods to verify field generated results.</em>
+
+<br clear="left"/>
+
+<br><br>
+
+<img src="figures/Figure 4.png" align="left" height="500" />
+
+<em><strong>Figure 3. </strong> Images of the different FASTeDNA field kits and associated consumables used for field-based eDNA sample processing: (a) filter-cutting kit for halving an eDNA filter prior to extraction; (b) field DNA extraction kit and required pre-aliquoted reagents and consumables; (c) field extraction negative control (ENEG) kit and required pre-aliquoted reagents and consumables; and (d) qPCR assay kit and consumables used to analyze extracted DNA for a targeted species.</em>
+
+<br clear="left"/>
+
+<br><br>
+
+<p>
+  <img src="figures/Figure 6.png" height="500" />
+  
+<em><strong>Figure 4. </strong>  Implementation of FASTeDNA across a range of deployment scenarios within existing monitoring programs; (a) FASTeDNA deployed in the living room of an Airbnb to process samples for detection of A. lupus during the St. Ann’s Bank survey; (b) deployed on the deck of the PakCat to process samples collected off Navy Island for detection of S. muticum; (c) FASTeDNA extraction setup and (d) qPCR setup inside the cabin of the DeWreede for the analysis of S. balanoides samples collected during vessel cleaning activities; (e) deployed in a tent to process samples from Three-Mile Lake for detection of P. clarkii during an ecosystem management survey; and (f) deployed in a field office to process samples collected from two locations for detection of H. sanguineus at Keji Seaside.</em>
+</p>
+
+<br>
+
+----
+
+### Protocols
